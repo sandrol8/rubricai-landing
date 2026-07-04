@@ -6,7 +6,7 @@
   <title>Rubric AI — A IA analisa. O professor decide.</title>
   <meta name="description" content="Plataforma brasileira de correção acadêmica assistida por IA para professores universitários. TCCs, papers e monografias de mestrado." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -57,16 +57,8 @@
       justify-content: space-between;
     }
 
-    .nav-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--purple);
-      text-decoration: none;
-      letter-spacing: -0.5px;
-    }
-
-    .nav-brand span { color: var(--yellow); }
+    .nav-brand { display: flex; align-items: center; text-decoration: none; }
+    .nav-brand img { height: 48px; display: block; }
 
     .nav-links {
       display: flex;
@@ -177,9 +169,7 @@
       font-style: italic;
     }
 
-    .hero-visual {
-      position: relative;
-    }
+    .hero-visual { position: relative; }
 
     .hero-screenshot {
       width: 100%;
@@ -206,62 +196,107 @@
       margin-top: 12px;
     }
 
-    /* TECNOLOGIA */
+    /* TECNOLOGIA — estilo slide */
     .tecnologia {
       padding: 88px 24px;
-      background: var(--navy);
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      position: relative;
+      overflow: hidden;
     }
 
-    .tecnologia .section-title h2 { color: var(--white); }
-    .tecnologia .section-title p { color: rgba(255,255,255,0.65); }
+    .tecnologia::before {
+      content: "";
+      position: absolute;
+      top: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, rgba(255,255,255,0) 70%);
+      border-radius: 50%;
+    }
+
+    .tecnologia::after {
+      content: "";
+      position: absolute;
+      bottom: -150px; right: -50px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, rgba(255,255,255,0) 70%);
+      border-radius: 50%;
+    }
+
+    .tecnologia .section-title { margin-bottom: 48px; position: relative; z-index: 1; }
+
+    .tecnologia .section-title h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .tecnologia .section-title p {
+      color: #475569;
+      font-size: 1.25rem;
+      font-weight: 600;
+      max-width: 700px;
+    }
 
     .tech-grid {
-      max-width: 1000px;
+      max-width: 1160px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
+      position: relative;
+      z-index: 1;
     }
 
     .tech-card {
-      background: var(--navy-light);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 32px 28px;
-      transition: transform 0.2s, border-color 0.2s;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 24px;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(15,23,42,0.04);
+      transition: transform 0.25s, box-shadow 0.25s;
     }
 
     .tech-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(251,191,36,0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 24px 48px rgba(124,58,237,0.12);
     }
 
-    .tech-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: rgba(251,191,36,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 18px;
+    .tech-illus {
+      width: 140px;
+      height: 140px;
+      border-radius: 20px;
+      object-fit: cover;
+      margin-bottom: 24px;
+      display: block;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
     }
 
     .tech-card h3 {
-      color: var(--white);
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 10px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 14px;
+      line-height: 1.3;
     }
 
     .tech-card p {
-      color: rgba(255,255,255,0.65);
-      font-size: 0.9rem;
+      color: #64748b;
+      font-size: 0.9375rem;
       line-height: 1.6;
     }
 
-    .tech-card p strong { color: var(--yellow); font-weight: 600; }
+    .tech-card p strong { color: #8b5cf6; font-weight: 800; }
 
     /* PRODUTOS */
     .produtos {
@@ -759,12 +794,15 @@
     }
 
     /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .tech-grid { grid-template-columns: 1fr 1fr; }
+    }
+
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: 40px; }
       .hero { text-align: center; padding-top: 112px; }
       .hero-sub { margin-left: auto; margin-right: auto; }
       .hero-ctas { justify-content: center; }
-      .tech-grid { grid-template-columns: 1fr; }
       .seg-grid { grid-template-columns: 1fr; }
     }
 
@@ -774,6 +812,7 @@
       .steps { grid-template-columns: 1fr; }
       .planos-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr; text-align: center; }
+      .tech-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 480px) {
@@ -786,7 +825,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="nav-brand">Rubric<span>AI</span></a>
+    <a href="#" class="nav-brand"><img src="logo_purple.png" alt="Rubric AI — A IA analisa. O professor decide." /></a>
     <ul class="nav-links">
       <li><a href="#tecnologia">Tecnologia</a></li>
       <li><a href="#produtos">Produtos</a></li>
@@ -827,24 +866,24 @@
   </div>
   <div class="tech-grid">
     <div class="tech-card">
-      <div class="tech-icon" aria-hidden="true">👁️</div>
+      <img src="tech1.png" alt="Ilustração de olho analisando um documento" class="tech-illus" />
       <h3>Leitura completa: texto e visual</h3>
       <p>Nossa IA lê o conteúdo do trabalho e analisa <strong>visualmente cada página</strong> — espaçamento, formatação, estrutura — como um professor faria com o documento em mãos.</p>
     </div>
     <div class="tech-card">
-      <div class="tech-icon" aria-hidden="true">🎯</div>
+      <img src="tech2.png" alt="Ilustração de prancheta com critérios e alvo com flecha" class="tech-illus" />
       <h3>Calibrado com rubricas reais</h3>
-      <p>O motor de correção foi calibrado <strong>critério a critério</strong> com rubricas acadêmicas reais (APA/Webquest), validado com trabalhos de verdade ao lado de professores universitários.</p>
+      <p>O motor de correção foi calibrado <strong>critério a critério</strong> com rubricas acadêmicas reais, validado com trabalhos de verdade ao lado de professores.</p>
     </div>
     <div class="tech-card">
-      <div class="tech-icon" aria-hidden="true">⚙️</div>
+      <img src="tech3.png" alt="Ilustração de engrenagem com códigos binários e símbolos matemáticos" class="tech-illus" />
       <h3>Verificações determinísticas</h3>
-      <p>Critérios objetivos — contagem de palavras, autores citados, páginas — são verificados por <strong>algoritmos exatos</strong>, não por estimativa. Mesmo trabalho, mesmo resultado, sempre.</p>
+      <p>Critérios objetivos — contagem de palavras, autores citados, páginas — são verificados por <strong>algoritmos exatos</strong>, não por estimativa.</p>
     </div>
     <div class="tech-card">
-      <div class="tech-icon" aria-hidden="true">👩‍🏫</div>
+      <img src="tech4.png" alt="Ilustração de professora revisando correção no laptop" class="tech-illus" />
       <h3>O professor decide</h3>
-      <p>Cada critério pode ser revisado e alterado pelo professor. <strong>Nota e planilha recalculam na hora</strong>, refletindo exatamente a decisão docente — a IA sugere, você comanda.</p>
+      <p>Cada critério pode ser revisado pelo professor. <strong>Nota e planilha recalculam na hora</strong> — a IA sugere, você comanda.</p>
     </div>
   </div>
 </section>
