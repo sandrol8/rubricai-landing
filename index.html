@@ -17,6 +17,7 @@
       --yellow: #FBBF24;
       --navy: #0D1B3E;
       --navy-light: #1E2F5E;
+      --navy-btn: #1A2A4A;
       --gold: #C9A84C;
       --gold-light: #E8C96A;
       --white: #FFFFFF;
@@ -33,6 +34,7 @@
       color: #1F2937;
       background: var(--white);
       line-height: 1.6;
+      font-size: 16px;
     }
 
     /* NAV */
@@ -84,6 +86,7 @@
     }
 
     .nav-links a:hover { color: var(--purple); }
+    .nav-links a:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
 
     .nav-cta {
       background: var(--purple) !important;
@@ -97,9 +100,17 @@
 
     /* HERO */
     .hero {
-      padding: 120px 24px 80px;
-      text-align: center;
+      padding: 128px 24px 88px;
       background: linear-gradient(160deg, #FAF5FF 0%, #FFFFFF 50%, #FFF8E7 100%);
+    }
+
+    .hero-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
     }
 
     .hero-eyebrow {
@@ -117,12 +128,11 @@
 
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-size: clamp(2.25rem, 4vw, 3.25rem);
       font-weight: 800;
       color: #111827;
       line-height: 1.15;
-      max-width: 760px;
-      margin: 0 auto 20px;
+      margin-bottom: 20px;
       letter-spacing: -1px;
     }
 
@@ -134,20 +144,128 @@
     .hero-sub {
       font-size: 1.125rem;
       color: var(--gray);
-      max-width: 560px;
-      margin: 0 auto 48px;
+      margin-bottom: 32px;
+      max-width: 480px;
     }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 14px 28px;
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+
+    .hero-btn.primary { background: var(--purple); color: var(--white); box-shadow: 0 4px 16px rgba(124,58,237,0.3); }
+    .hero-btn.primary:hover { background: var(--purple-dark); transform: translateY(-1px); }
+    .hero-btn.secondary { background: var(--navy-btn); color: var(--white); }
+    .hero-btn.secondary:hover { background: var(--navy); transform: translateY(-1px); }
+    .hero-btn:focus-visible { outline: 2px solid var(--purple-dark); outline-offset: 2px; }
 
     .hero-tagline {
       font-size: 0.875rem;
       color: var(--gray);
-      margin-top: 20px;
       font-style: italic;
     }
 
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-screenshot {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(13,27,62,0.18), 0 4px 16px rgba(124,58,237,0.12);
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: -20px -20px auto auto;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(251,191,36,0.35), transparent 70%);
+      z-index: -1;
+    }
+
+    .hero-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-top: 12px;
+    }
+
+    /* TECNOLOGIA */
+    .tecnologia {
+      padding: 88px 24px;
+      background: var(--navy);
+    }
+
+    .tecnologia .section-title h2 { color: var(--white); }
+    .tecnologia .section-title p { color: rgba(255,255,255,0.65); }
+
+    .tech-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .tech-card {
+      background: var(--navy-light);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 32px 28px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .tech-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(251,191,36,0.4);
+    }
+
+    .tech-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(251,191,36,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+
+    .tech-card h3 {
+      color: var(--white);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .tech-card p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .tech-card p strong { color: var(--yellow); font-weight: 600; }
+
     /* PRODUTOS */
     .produtos {
-      padding: 80px 24px;
+      padding: 88px 24px;
       background: var(--white);
     }
 
@@ -168,7 +286,7 @@
     .section-title p {
       color: var(--gray);
       font-size: 1rem;
-      max-width: 480px;
+      max-width: 520px;
       margin: 0 auto;
     }
 
@@ -275,23 +393,17 @@
       transition: all 0.2s;
     }
 
-    .btn-purple {
-      background: var(--purple);
-      color: var(--white);
-    }
+    .btn:focus-visible { outline: 2px solid var(--purple-dark); outline-offset: 2px; }
 
+    .btn-purple { background: var(--purple); color: var(--white); }
     .btn-purple:hover { background: var(--purple-dark); }
 
-    .btn-gold {
-      background: var(--gold);
-      color: var(--navy);
-    }
-
+    .btn-gold { background: var(--gold); color: var(--navy); }
     .btn-gold:hover { background: var(--gold-light); }
 
     /* COMO FUNCIONA */
     .como {
-      padding: 80px 24px;
+      padding: 88px 24px;
       background: var(--off-white);
     }
 
@@ -301,7 +413,6 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 32px;
-      margin-top: 0;
     }
 
     .step {
@@ -340,10 +451,62 @@
       line-height: 1.5;
     }
 
+    /* SEGURANÇA */
+    .seguranca {
+      padding: 88px 24px;
+      background: var(--white);
+    }
+
+    .seg-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .seg-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      background: var(--white);
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .seg-card:hover {
+      border-color: var(--purple);
+      box-shadow: 0 4px 20px rgba(124,58,237,0.1);
+    }
+
+    .seg-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: #EDE9FE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+    }
+
+    .seg-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .seg-card p {
+      font-size: 0.875rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
     /* PLANOS */
     .planos {
-      padding: 80px 24px;
-      background: var(--white);
+      padding: 88px 24px;
+      background: var(--off-white);
     }
 
     .planos-tabs {
@@ -365,6 +528,8 @@
       font-family: 'Inter', sans-serif;
       color: var(--gray);
     }
+
+    .tab-btn:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
 
     .tab-btn.active-purple {
       background: var(--purple);
@@ -393,6 +558,7 @@
       text-align: center;
       transition: all 0.2s;
       position: relative;
+      background: var(--white);
     }
 
     .plano-card.destaque-purple {
@@ -467,6 +633,8 @@
       transition: all 0.2s;
     }
 
+    .plano-btn:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
+
     .plano-btn.purple { background: var(--purple); color: var(--white); }
     .plano-btn.purple:hover { background: var(--purple-dark); }
     .plano-btn.gold { background: var(--gold); color: var(--navy); }
@@ -480,7 +648,7 @@
 
     /* CONTATO */
     .contato {
-      padding: 80px 24px;
+      padding: 88px 24px;
       background: linear-gradient(145deg, #0D1B3E, #1E2F5E);
       text-align: center;
       color: var(--white);
@@ -518,6 +686,8 @@
       transition: all 0.2s;
     }
 
+    .contato-link:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+
     .contato-link.whatsapp { background: #25D366; color: var(--white); }
     .contato-link.whatsapp:hover { background: #1DB954; }
     .contato-link.email { background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
@@ -528,13 +698,42 @@
     footer {
       background: #080F1F;
       color: rgba(255,255,255,0.5);
-      text-align: center;
-      padding: 24px;
-      font-size: 0.8rem;
+      padding: 48px 24px 24px;
+      font-size: 0.85rem;
     }
 
-    footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .footer-grid {
+      max-width: 1000px;
+      margin: 0 auto 32px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      text-align: left;
+    }
+
+    .footer-col h4 {
+      color: var(--white);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .footer-col p { line-height: 1.7; }
+
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--white); }
+
+    .footer-bottom {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      font-size: 0.78rem;
+    }
 
     /* WHATSAPP FLOAT */
     .whatsapp-float {
@@ -560,11 +759,21 @@
     }
 
     /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero { text-align: center; padding-top: 112px; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-ctas { justify-content: center; }
+      .tech-grid { grid-template-columns: 1fr; }
+      .seg-grid { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .produtos-grid { grid-template-columns: 1fr; }
       .steps { grid-template-columns: 1fr; }
       .planos-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; }
     }
 
     @media (max-width: 480px) {
@@ -579,6 +788,7 @@
   <div class="nav-inner">
     <a href="#" class="nav-brand">Rubric<span>AI</span></a>
     <ul class="nav-links">
+      <li><a href="#tecnologia">Tecnologia</a></li>
       <li><a href="#produtos">Produtos</a></li>
       <li><a href="#como">Como funciona</a></li>
       <li><a href="#planos">Planos</a></li>
@@ -591,10 +801,52 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">Plataforma Brasileira de Correção Acadêmica com IA</div>
-  <h1>Corrija trabalhos acadêmicos com <em>precisão e velocidade</em></h1>
-  <p class="hero-sub">Feedback estruturado, critérios personalizados e controle total nas mãos do professor. Para TCCs e monografias de mestrado.</p>
-  <p class="hero-tagline">"A IA analisa. O professor decide."</p>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">Correção Acadêmica com IA</div>
+      <h1>Corrija TCCs em <em>minutos</em>, não em fins de semana</h1>
+      <p class="hero-sub">A IA avalia cada trabalho critério a critério, com feedback estruturado e nota calculada — e você revisa, ajusta e aprova. O controle é sempre do professor.</p>
+      <div class="hero-ctas">
+        <a href="https://app.rubricai.com.br" class="hero-btn primary">Começar grátis →</a>
+        <a href="https://wa.me/5511944773623?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20institucional%20do%20Rubric%20AI." class="hero-btn secondary" target="_blank" rel="noopener">Agendar demonstração institucional</a>
+      </div>
+      <p class="hero-tagline">"A IA analisa. O professor decide."</p>
+    </div>
+    <div class="hero-visual">
+      <img src="tela%20Rucric%20ai.png" alt="Tela de correção do Rubric AI mostrando a nota final e os critérios avaliados de um trabalho acadêmico" class="hero-screenshot" />
+      <p class="hero-caption">Tela real da plataforma: nota final e critérios avaliados um a um.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TECNOLOGIA -->
+<section class="tecnologia" id="tecnologia">
+  <div class="section-title">
+    <h2>Nossa tecnologia</h2>
+    <p>Um motor de correção construído com professores, para professores.</p>
+  </div>
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="tech-icon" aria-hidden="true">👁️</div>
+      <h3>Leitura completa: texto e visual</h3>
+      <p>Nossa IA lê o conteúdo do trabalho e analisa <strong>visualmente cada página</strong> — espaçamento, formatação, estrutura — como um professor faria com o documento em mãos.</p>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" aria-hidden="true">🎯</div>
+      <h3>Calibrado com rubricas reais</h3>
+      <p>O motor de correção foi calibrado <strong>critério a critério</strong> com rubricas acadêmicas reais (APA/Webquest), validado com trabalhos de verdade ao lado de professores universitários.</p>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" aria-hidden="true">⚙️</div>
+      <h3>Verificações determinísticas</h3>
+      <p>Critérios objetivos — contagem de palavras, autores citados, páginas — são verificados por <strong>algoritmos exatos</strong>, não por estimativa. Mesmo trabalho, mesmo resultado, sempre.</p>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" aria-hidden="true">👩‍🏫</div>
+      <h3>O professor decide</h3>
+      <p>Cada critério pode ser revisado e alterado pelo professor. <strong>Nota e planilha recalculam na hora</strong>, refletindo exatamente a decisão docente — a IA sugere, você comanda.</p>
+    </div>
+  </div>
 </section>
 
 <!-- PRODUTOS -->
@@ -609,7 +861,7 @@
     <!-- Rubric AI -->
     <div class="produto-card">
       <div class="produto-header purple">
-        <img src="logo_purple.png" alt="Rubric AI" class="produto-logo" />
+        <img src="logo_purple.png" alt="Logotipo do Rubric AI" class="produto-logo" />
         <span class="produto-badge badge-purple">Para graduação</span>
         <h3>Rubric AI</h3>
         <p>Correção inteligente de TCCs, papers e trabalhos acadêmicos com IA e rubricas institucionais.</p>
@@ -629,7 +881,7 @@
     <!-- Rubric AI Masters -->
     <div class="produto-card">
       <div class="produto-header navy">
-        <img src="logo_masters_v2.png" alt="Rubric AI Masters" class="produto-logo" />
+        <img src="logo_masters_v2.png" alt="Logotipo do Rubric AI Masters" class="produto-logo" />
         <span class="produto-badge badge-gold">Para pós-graduação</span>
         <h3>Rubric AI Masters</h3>
         <p>Plataforma iterativa para orientação de monografias de mestrado. A IA insere comentários nativos no Word.</p>
@@ -658,20 +910,45 @@
     </div>
     <div class="steps">
       <div class="step">
-        <div class="step-icon purple">📤</div>
+        <div class="step-icon purple" aria-hidden="true">📤</div>
         <h4>1. Professor faz upload</h4>
         <p>Envie o trabalho do aluno em PDF ou Word. A IA lê e interpreta o conteúdo automaticamente.</p>
       </div>
       <div class="step">
-        <div class="step-icon gold">🤖</div>
+        <div class="step-icon gold" aria-hidden="true">🤖</div>
         <h4>2. IA analisa e comenta</h4>
         <p>A IA avalia contra os critérios definidos e gera feedback estruturado — pronto para revisão.</p>
       </div>
       <div class="step">
-        <div class="step-icon green">✅</div>
+        <div class="step-icon green" aria-hidden="true">✅</div>
         <h4>3. Professor decide</h4>
-        <p>Revise, edite ou aprove os comentários. Você tem o controle total antes de devolver ao aluno.</p>
+        <p>Revise, edite ou aprove. A nota recalcula na hora conforme suas decisões, antes de devolver ao aluno.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGURANÇA -->
+<section class="seguranca" id="seguranca">
+  <div class="section-title">
+    <h2>Segurança, Ética e Controle Docente</h2>
+    <p>IA na educação exige responsabilidade. Estes são os nossos compromissos.</p>
+  </div>
+  <div class="seg-grid">
+    <div class="seg-card">
+      <div class="seg-icon" aria-hidden="true">🔒</div>
+      <h3>Privacidade e LGPD</h3>
+      <p>Os trabalhos enviados são usados exclusivamente para a correção solicitada. Dados pessoais tratados conforme a Lei Geral de Proteção de Dados, com infraestrutura em nuvem segura.</p>
+    </div>
+    <div class="seg-card">
+      <div class="seg-icon" aria-hidden="true">⚖️</div>
+      <h3>IA como assistente, nunca juíza</h3>
+      <p>Nenhuma nota é definitiva sem revisão docente. A plataforma foi desenhada para que a decisão final seja sempre do professor — por princípio, não por opção.</p>
+    </div>
+    <div class="seg-card">
+      <div class="seg-icon" aria-hidden="true">📋</div>
+      <h3>Transparência total</h3>
+      <p>Cada critério avaliado vem com justificativa explícita e verificável. O professor vê exatamente por que a IA sugeriu cada resultado — sem caixa-preta.</p>
     </div>
   </div>
 </section>
@@ -760,14 +1037,14 @@
   <h2>Fale com a gente</h2>
   <p>Tire dúvidas, solicite uma demonstração ou converse sobre planos para sua instituição.</p>
   <div class="contato-links">
-    <a href="https://wa.me/5511944773623" class="contato-link whatsapp" target="_blank">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <a href="https://wa.me/5511944773623" class="contato-link whatsapp" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       (11) 94477-3623
     </a>
     <a href="mailto:contato@rubricai.com.br" class="contato-link email">
       ✉ contato@rubricai.com.br
     </a>
-    <a href="https://instagram.com/rubricaioficial" class="contato-link instagram" target="_blank">
+    <a href="https://instagram.com/rubricaioficial" class="contato-link instagram" target="_blank" rel="noopener">
       📸 @rubricaioficial
     </a>
   </div>
@@ -775,12 +1052,39 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 Rubric AI · Prompty Soluções · João Pessoa/PB · CNPJ 46.595.694/0001-58 &nbsp;|&nbsp; <a href="/privacidade.html">Política de Privacidade</a></p>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Rubric AI</h4>
+      <p>Plataforma brasileira de correção acadêmica assistida por inteligência artificial. Feedback estruturado, critérios verificáveis e controle total nas mãos do professor.<br><em>"A IA analisa. O professor decide."</em></p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#tecnologia">Tecnologia</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#como">Como funciona</a></li>
+        <li><a href="#planos">Planos</a></li>
+        <li><a href="/privacidade.html">Política de Privacidade</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="https://wa.me/5511944773623" target="_blank" rel="noopener">WhatsApp: (11) 94477-3623</a></li>
+        <li><a href="mailto:contato@rubricai.com.br">contato@rubricai.com.br</a></li>
+        <li><a href="https://instagram.com/rubricaioficial" target="_blank" rel="noopener">@rubricaioficial</a></li>
+        <li>João Pessoa/PB — Brasil</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Rubric AI · Prompty Soluções · João Pessoa/PB · CNPJ 46.595.694/0001-58</p>
+  </div>
 </footer>
 
 <!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/5511944773623" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<a href="https://wa.me/5511944773623" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <script>
