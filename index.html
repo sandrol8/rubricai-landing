@@ -345,28 +345,27 @@
       margin: 0 auto;
     }
 
-    /* Layout: apresentador na coluna esquerda + 3 cards à direita */
-    .produtos-layout {
-      max-width: 1240px;
+    /* Palco: foto do apresentador sangrando à esquerda, cards por cima */
+    .produtos-stage {
+      max-width: 1320px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 32px;
-      align-items: end;
+      grid-template-columns: 33% 1fr;
+      align-items: end;          /* a base da foto encosta na base dos cards */
     }
 
-    .apresentador {
-      align-self: end;
-    }
-
-    .apresentador img {
+    .produtos-foto {
       width: 100%;
       height: auto;
       display: block;
-      filter: drop-shadow(0 20px 30px rgba(13,27,62,0.16));
+      margin-right: -8px;        /* a borda reta da foto desliza para baixo do 1o card */
+      pointer-events: none;
+      user-select: none;
     }
 
     .produtos-grid {
+      position: relative;
+      z-index: 1;                /* cards por cima da foto */
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
@@ -418,9 +417,9 @@
       display: inline-block;
       font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 4px 12px;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      padding: 5px 16px;
       border-radius: 100px;
       margin-bottom: 8px;
     }
@@ -885,14 +884,14 @@
 
     /* RESPONSIVE */
     @media (max-width: 1180px) {
-      .produtos-layout { grid-template-columns: 260px 1fr; gap: 24px; }
+      .produtos-grid { gap: 18px; }
     }
 
     @media (max-width: 1024px) {
       .tech-grid { grid-template-columns: 1fr 1fr; }
-      /* Abaixo desta largura o apresentador ocuparia espaço demais */
-      .produtos-layout { grid-template-columns: 1fr; }
-      .apresentador { display: none; }
+      /* Abaixo desta largura a foto ocuparia espaço demais */
+      .produtos-stage { display: block; }
+      .produtos-foto { display: none; }
     }
 
     @media (max-width: 900px) {
@@ -993,12 +992,10 @@
     <p>Três produtos especializados para cada etapa da jornada acadêmica — da graduação à pós-graduação, da correção à detecção de IA.</p>
   </div>
 
-  <div class="produtos-layout">
+  <div class="produtos-stage">
 
-    <!-- Apresentador -->
-    <div class="apresentador">
-      <img src="apresentador.png" alt="Consultor da Rubric AI apresentando os três produtos da plataforma" />
-    </div>
+    <img src="foto_produtos.jpg" class="produtos-foto"
+         alt="Consultor da Rubric AI, em um escritório, apresentando os três produtos da plataforma" />
 
     <div class="produtos-grid">
 
@@ -1006,19 +1003,17 @@
       <div class="produto-card">
         <div class="produto-header purple">
           <img src="logo_purple.png" alt="Logotipo do Rubric AI" class="produto-logo boxed" />
-          <span class="produto-badge badge-purple">Para graduação</span>
+          <span class="produto-badge badge-purple">Para Graduação</span>
           <h3>Rubric AI</h3>
-          <p>Correção inteligente de TCCs, papers e trabalhos acadêmicos com IA e rubricas institucionais.</p>
         </div>
         <div class="produto-body">
           <ul class="produto-features">
+            <li><span class="check-purple">✓</span> Correção inteligente de TCCs, papers e trabalhos acadêmicos com IA e rubricas institucionais.</li>
             <li><span class="check-purple">✓</span> Avaliação por rubrica personalizada</li>
-            <li><span class="check-purple">✓</span> Feedback detalhado por critério</li>
-            <li><span class="check-purple">✓</span> Leitura visual de PDF com IA</li>
-            <li><span class="check-purple">✓</span> Controle de correções por plano</li>
-            <li><span class="check-purple">✓</span> Professor revisa e decide tudo</li>
+            <li><span class="check-purple">✓</span> Feedback detalhado</li>
+            <li><span class="check-purple">✓</span> Leitura de PDF</li>
           </ul>
-          <a href="https://app.rubricai.com.br" class="btn btn-purple">Começar grátis →</a>
+          <a href="https://app.rubricai.com.br" class="btn btn-purple">Saiba mais →</a>
         </div>
       </div>
 
@@ -1026,19 +1021,17 @@
       <div class="produto-card">
         <div class="produto-header navy">
           <img src="logo_masters_v2.png" alt="Logotipo do Rubric AI Masters" class="produto-logo" />
-          <span class="produto-badge badge-gold">Para pós-graduação</span>
+          <span class="produto-badge badge-gold">Para Pós-Graduação</span>
           <h3>Rubric AI Masters</h3>
-          <p>Plataforma iterativa para orientação de monografias de mestrado. A IA insere comentários nativos no Word.</p>
         </div>
         <div class="produto-body">
           <ul class="produto-features">
-            <li><span class="check-gold">✓</span> Comentários nativos no Word (.docx)</li>
+            <li><span class="check-gold">✓</span> Plataforma iterativa para orientação de monografias de mestrado.</li>
+            <li><span class="check-gold">✓</span> A IA insere comentários nativos no Word.</li>
             <li><span class="check-gold">✓</span> Ciclo iterativo V1, V2, V3...</li>
-            <li><span class="check-gold">✓</span> Verifica aderência ao projeto aprovado</li>
-            <li><span class="check-gold">✓</span> Critérios por capítulo (APA)</li>
-            <li><span class="check-gold">✓</span> Nome do professor nos comentários</li>
+            <li><span class="check-gold">✓</span> Verifica aderência ao projeto aprovado.</li>
           </ul>
-          <a href="https://masters.rubricai.com.br" class="btn btn-gold">Conhecer o Masters →</a>
+          <a href="https://masters.rubricai.com.br" class="btn btn-gold">Saiba mais →</a>
         </div>
       </div>
 
@@ -1046,19 +1039,17 @@
       <div class="produto-card">
         <div class="produto-header teal">
           <img src="rubric_detect_ia_logo.png" alt="Logotipo do Rubric Detect IA" class="produto-logo boxed" />
-          <span class="produto-badge badge-teal">Detecção de IA</span>
+          <span class="produto-badge badge-teal">Detecção Inteligente</span>
           <h3>Rubric Detect IA</h3>
-          <p>Detecção de conteúdo gerado por IA em TCCs, monografias e teses. A IA analisa, o professor decide.</p>
         </div>
         <div class="produto-body">
           <ul class="produto-features">
-            <li><span class="check-teal">✓</span> Detecta IA em PDF e Word</li>
-            <li><span class="check-teal">✓</span> Análise trecho por trecho com score</li>
-            <li><span class="check-teal">✓</span> Aceita TCC, monografia e tese</li>
-            <li><span class="check-teal">✓</span> Compra avulsa, sem assinatura</li>
-            <li><span class="check-teal">✓</span> Indicador probabilístico, nunca prova</li>
+            <li><span class="check-teal">✓</span> Ferramenta avançada de detecção de IA em trabalhos acadêmicos.</li>
+            <li><span class="check-teal">✓</span> A IA analisa o conteúdo.</li>
+            <li><span class="check-teal">✓</span> Identifica padrões de geração automática.</li>
+            <li><span class="check-teal">✓</span> O professor decide.</li>
           </ul>
-          <a href="https://app.rubricai.com.br/deteccao-ia" class="btn btn-teal">Conhecer o Detect →</a>
+          <a href="https://app.rubricai.com.br/deteccao-ia" class="btn btn-teal">Saiba mais →</a>
         </div>
       </div>
 
