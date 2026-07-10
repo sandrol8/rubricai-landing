@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rubric AI Masters — Orientação e revisão de monografias com IA</title>
+  <meta name="description" content="Plataforma de apoio à orientação de monografias de mestrado. A IA insere comentários nativos no Word, verifica aderência ao projeto aprovado e acompanha o trabalho ao longo de versões. O orientador decide." />
+  <link rel="canonical" href="https://rubricai.com.br/rubric-ai-masters/" />
+  <meta property="og:title" content="Rubric AI Masters — Orientação de monografias com IA" />
+  <meta property="og:description" content="Comentários nativos no Word, análise por capítulo e acompanhamento por versões. A IA analisa. O professor decide." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rubricai.com.br/rubric-ai-masters/" />
+  <meta property="og:image" content="https://rubricai.com.br/logo_masters_v2.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0D1B3E;
+      --navy-light: #1E2F5E;
+      --gold: #C9A84C;
+      --gold-light: #E8C96A;
+      --gold-dark: #8A6D1F;
+      --white: #FFFFFF;
+      --off-white: #F8F6F0;
+      --gray: #6B7280;
+      --light-gray: #F3F4F6;
+      --border: #E5E7EB;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; }
+    a { color: inherit; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      height: 84px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-brand img { height: 62px; display: block; }
+
+    .nav-acoes { display: flex; align-items: center; gap: 10px; }
+
+    .nav-voltar {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gray);
+      text-decoration: none;
+      margin-right: 6px;
+    }
+    .nav-voltar:hover { color: var(--navy); }
+
+    .nav-btn {
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .nav-btn:hover { opacity: 0.88; }
+    .nav-btn.ghost { border: 1.5px solid var(--border); color: var(--navy); }
+    .nav-btn.gold { background: var(--gold); color: var(--navy); }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(150deg, #0D1B3E 0%, #16264F 55%, #1E2F5E 100%);
+      color: var(--white);
+      padding: 80px 24px 88px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(620px 340px at 82% 8%, rgba(201,168,76,0.16), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-logo {
+      height: 132px;
+      width: auto;
+      display: block;
+      margin: 0 auto 26px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4.4vw, 3.1rem);
+      font-weight: 800;
+      line-height: 1.16;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em { font-style: normal; color: var(--gold-light); }
+
+    .hero p {
+      font-size: 1.06rem;
+      line-height: 1.68;
+      color: rgba(255,255,255,0.8);
+      max-width: 42em;
+      margin: 0 auto;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--gold-light);
+      margin-top: 26px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.16s ease, opacity 0.16s ease;
+    }
+    .btn:hover { transform: translateY(-2px); opacity: 0.93; }
+    .btn.gold { background: var(--gold); color: var(--navy); }
+    .btn.vazado-claro { border: 1.5px solid rgba(255,255,255,0.34); color: var(--white); }
+    .btn.navy { background: var(--navy); color: var(--white); }
+    .btn.vazado-navy { border: 1.5px solid var(--border); color: var(--navy); }
+
+    /* ===== BLOCOS ===== */
+    section { padding: 82px 24px; }
+
+    .titulo {
+      max-width: 780px;
+      margin: 0 auto 52px;
+      text-align: center;
+    }
+
+    .titulo h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .titulo p {
+      font-size: 1rem;
+      color: var(--gray);
+      line-height: 1.66;
+    }
+
+    /* ===== Print do Word ===== */
+    .print { background: var(--off-white); }
+
+    .print-quadro {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .print-quadro img {
+      width: 100%;
+      display: block;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 26px 56px rgba(13,27,62,0.15);
+    }
+
+    .print-quadro figcaption {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 16px;
+    }
+
+    /* ===== Público ===== */
+    .publico-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .publico-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 30px 26px;
+      background: var(--white);
+    }
+
+    .publico-card h3 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .publico-card p { font-size: 0.9rem; color: #4B5563; line-height: 1.62; }
+
+    .publico-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--gold-dark);
+      margin-bottom: 10px;
+    }
+
+    /* ===== Ciclo de versões ===== */
+    .ciclo { background: var(--off-white); }
+
+    .ciclo-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .ciclo-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 14px;
+      padding: 28px 24px;
+    }
+
+    .ciclo-versao {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--gold-light);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+    }
+
+    .ciclo-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .ciclo-card p { font-size: 0.88rem; color: #4B5563; line-height: 1.6; }
+
+    /* ===== O que a IA analisa ===== */
+    .analisa-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 40px;
+    }
+
+    .analisa-grid li {
+      list-style: none;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.94rem;
+      color: #374151;
+    }
+
+    .analisa-grid li span { color: var(--gold-dark); font-weight: 700; }
+
+    .nota-etica {
+      max-width: 900px;
+      margin: 46px auto 0;
+      padding-left: 16px;
+      border-left: 3px solid var(--gold);
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ===== Planos ===== */
+    .planos { background: var(--off-white); }
+
+    .planos-grid {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .plano {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px 22px 26px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .plano.destaque {
+      border: 2px solid var(--gold);
+      box-shadow: 0 18px 40px rgba(201,168,76,0.18);
+    }
+
+    .plano-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .plano-nome { font-size: 1.05rem; font-weight: 700; }
+    .plano-qtd { font-size: 0.84rem; color: var(--gray); margin-bottom: 18px; }
+
+    .plano-preco {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.15rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1.1;
+    }
+
+    .plano-preco small {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0;
+    }
+
+    .plano-sub { font-size: 0.82rem; color: var(--gray); margin: 8px 0 22px; }
+
+    .plano .btn {
+      margin-top: auto;
+      padding: 12px 18px;
+      font-size: 0.86rem;
+    }
+
+    /* ===== CTA final ===== */
+    .cta-final {
+      background: linear-gradient(150deg, #0D1B3E 0%, #1E2F5E 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta-final h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-final p {
+      color: rgba(255,255,255,0.76);
+      max-width: 34em;
+      margin: 0 auto 32px;
+    }
+
+    /* ===== Rodapé ===== */
+    footer {
+      background: #060D22;
+      color: rgba(255,255,255,0.6);
+      padding: 44px 24px;
+      text-align: center;
+      font-size: 0.84rem;
+    }
+
+    footer a { color: rgba(255,255,255,0.72); text-decoration: none; }
+    footer a:hover { color: var(--gold-light); }
+    footer .links { margin-bottom: 14px; display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; }
+
+    /* ===== Responsivo ===== */
+    @media (max-width: 1024px) {
+      .planos-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .publico-grid, .ciclo-grid { grid-template-columns: 1fr; }
+      .analisa-grid { grid-template-columns: 1fr; }
+      .nav-voltar { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      section { padding: 60px 20px; }
+      .planos-grid { grid-template-columns: 1fr; max-width: 420px; }
+      .nav-inner { height: 72px; }
+      .nav-brand img { height: 52px; }
+      .hero-logo { height: 96px; }
+      .nav-btn.ghost { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand"><img src="../logo_purple.png" alt="Rubric AI — página inicial" /></a>
+    <div class="nav-acoes">
+      <a href="../#produtos" class="nav-voltar">← Todos os produtos</a>
+      <a href="https://masters.rubricai.com.br" class="nav-btn ghost">Entrar</a>
+      <a href="https://masters.rubricai.com.br" class="nav-btn gold">Começar grátis</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <img src="../logo_masters_v2.png" alt="Logotipo do Rubric AI Masters" class="hero-logo" />
+    <h1>Orientação de monografias com IA, <em>versão após versão</em></h1>
+    <p>O Rubric AI Masters apoia orientadores e programas de pós-graduação na revisão de monografias de mestrado. A IA lê o trabalho, insere comentários nativos no próprio arquivo do Word, verifica a aderência ao projeto aprovado e acompanha a evolução ao longo das versões. O orientador revisa, ajusta e decide.</p>
+    <p class="hero-tagline">"A IA analisa. O professor decide."</p>
+    <div class="hero-ctas">
+      <a href="https://masters.rubricai.com.br" class="btn gold">Começar gratuitamente →</a>
+      <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20o%20Rubric%20AI%20Masters%20para%20o%20meu%20programa%20de%20p%C3%B3s-gradua%C3%A7%C3%A3o." class="btn vazado-claro" target="_blank" rel="noopener">Falar com especialista</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRINT DO WORD -->
+<section class="print">
+  <div class="titulo">
+    <h2>Comentários nativos, dentro do arquivo do aluno</h2>
+    <p>Nada de relatório à parte. A IA devolve o mesmo <code>.docx</code>, com os comentários na margem, assinados com o nome do orientador — prontos para revisar, editar ou apagar antes de enviar ao aluno.</p>
+  </div>
+  <figure class="print-quadro">
+    <img src="../masters-comentarios.jpg" alt="Documento do Word aberto com comentários da IA na margem direita, assinados pelo professor, apontando ajustes no problema de pesquisa, nos objetivos e na justificativa" />
+    <figcaption>Arquivo real devolvido pela plataforma: comentários na margem, um por critério, com a justificativa do apontamento.</figcaption>
+  </figure>
+</section>
+
+<!-- PARA QUEM É -->
+<section>
+  <div class="titulo">
+    <h2>Para quem é</h2>
+    <p>Feito para quem acompanha o trabalho do começo ao fim, não apenas na entrega final.</p>
+  </div>
+  <div class="publico-grid">
+    <div class="publico-card">
+      <div class="publico-num">01</div>
+      <h3>Orientadores</h3>
+      <p>Que revisam o mesmo trabalho várias vezes e precisam manter coerência entre uma versão e outra, sem reler tudo do zero.</p>
+    </div>
+    <div class="publico-card">
+      <div class="publico-num">02</div>
+      <h3>Programas de pós-graduação</h3>
+      <p>Que precisam de padrão acadêmico consistente entre orientadores diferentes, com critérios explícitos e verificáveis.</p>
+    </div>
+    <div class="publico-card">
+      <div class="publico-num">03</div>
+      <h3>Mestrandos</h3>
+      <p>Que querem entender o que precisa melhorar antes da banca, com apontamentos claros e justificados, capítulo por capítulo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CICLO DE VERSÕES -->
+<section class="ciclo">
+  <div class="titulo">
+    <h2>Um ciclo, não uma correção única</h2>
+    <p>A monografia não nasce pronta. A plataforma acompanha cada versão e mostra o que mudou.</p>
+  </div>
+  <div class="ciclo-grid">
+    <div class="ciclo-card">
+      <div class="ciclo-versao">VERSÃO 1</div>
+      <h3>Diagnóstico</h3>
+      <p>O aluno envia a primeira versão. A IA analisa capítulo por capítulo e devolve o arquivo comentado, apontando o que falta e por quê.</p>
+    </div>
+    <div class="ciclo-card">
+      <div class="ciclo-versao">VERSÃO 2</div>
+      <h3>Revisão</h3>
+      <p>Com os ajustes feitos, a nova versão é analisada de novo. A plataforma verifica se os apontamentos anteriores foram atendidos.</p>
+    </div>
+    <div class="ciclo-card">
+      <div class="ciclo-versao">VERSÃO 3…</div>
+      <h3>Convergência</h3>
+      <p>O ciclo se repete até o trabalho atingir o padrão esperado. O histórico fica registrado, e o orientador vê a evolução.</p>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE A IA ANALISA -->
+<section>
+  <div class="titulo">
+    <h2>O que a IA analisa</h2>
+    <p>Critérios acadêmicos definidos pelo programa, aplicados do mesmo jeito em todos os trabalhos.</p>
+  </div>
+  <ul class="analisa-grid">
+    <li><span>✓</span> Aderência ao projeto de pesquisa aprovado</li>
+    <li><span>✓</span> Formulação do problema de pesquisa</li>
+    <li><span>✓</span> Coerência entre objetivo geral e específicos</li>
+    <li><span>✓</span> Justificativa e relevância do estudo</li>
+    <li><span>✓</span> Consistência metodológica</li>
+    <li><span>✓</span> Estrutura e encadeamento dos capítulos</li>
+    <li><span>✓</span> Uso e integração das citações</li>
+    <li><span>✓</span> Padrão de normalização acadêmica (APA)</li>
+  </ul>
+  <p class="nota-etica">A IA sugere, comenta e organiza. Ela não aprova, não reprova e não substitui a leitura do orientador. Todo comentário pode ser editado ou removido antes de chegar ao aluno, e a decisão sobre o trabalho é sempre humana.</p>
+</section>
+
+<!-- PLANOS -->
+<section class="planos" id="planos">
+  <div class="titulo">
+    <h2>Planos e preços</h2>
+    <p>Pacotes por turma, sem assinatura mensal. Comece grátis e escale conforme a demanda do programa.</p>
+  </div>
+  <div class="planos-grid">
+    <div class="plano">
+      <div class="plano-nome">Gratuito</div>
+      <div class="plano-qtd">3 monografias</div>
+      <div class="plano-preco">R$&thinsp;0</div>
+      <div class="plano-sub">Para experimentar</div>
+      <a href="https://masters.rubricai.com.br" class="btn vazado-navy">Começar grátis</a>
+    </div>
+    <div class="plano">
+      <div class="plano-nome">Básico</div>
+      <div class="plano-qtd">15 monografias</div>
+      <div class="plano-preco">R$&thinsp;49<small>,90 por turma</small></div>
+      <div class="plano-sub">Para orientadores</div>
+      <a href="https://masters.rubricai.com.br" class="btn vazado-navy">Comprar pacote</a>
+    </div>
+    <div class="plano destaque">
+      <div class="plano-badge">Mais popular</div>
+      <div class="plano-nome">Profissional</div>
+      <div class="plano-qtd">30 monografias</div>
+      <div class="plano-preco">R$&thinsp;79<small>,90 por turma</small></div>
+      <div class="plano-sub">Para programas de pós</div>
+      <a href="https://masters.rubricai.com.br" class="btn gold">Comprar pacote</a>
+    </div>
+    <div class="plano">
+      <div class="plano-nome">Premium</div>
+      <div class="plano-qtd">50 monografias</div>
+      <div class="plano-preco">R$&thinsp;109<small> por turma</small></div>
+      <div class="plano-sub">Para turmas grandes</div>
+      <a href="https://masters.rubricai.com.br" class="btn vazado-navy">Comprar pacote</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <h2>Comece pela primeira monografia</h2>
+  <p>Envie um trabalho, receba o arquivo comentado e veja se o padrão de análise serve para o seu programa. As três primeiras são gratuitas.</p>
+  <div class="hero-ctas">
+    <a href="https://masters.rubricai.com.br" class="btn gold">Começar gratuitamente →</a>
+    <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20do%20Rubric%20AI%20Masters." class="btn vazado-claro" target="_blank" rel="noopener">Agendar demonstração</a>
+  </div>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="../">Início</a>
+    <a href="../#produtos">Produtos</a>
+    <a href="../#planos">Planos</a>
+    <a href="../#seguranca">Segurança</a>
+    <a href="../#contato">Contato</a>
+    <a href="../privacidade.html">Política de Privacidade</a>
+  </div>
+  <p>© 2026 Rubric AI · Prompty Soluções · João Pessoa/PB · CNPJ 46.595.694/0001-58</p>
+</footer>
+
+</body>
+</html>
