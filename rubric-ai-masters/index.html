@@ -91,9 +91,9 @@
 
     /* ===== HERO ===== */
     .hero {
-      background: linear-gradient(150deg, #0D1B3E 0%, #16264F 55%, #1E2F5E 100%);
+      background: #071938;                 /* mesma cor do fundo do logo */
       color: var(--white);
-      padding: 80px 24px 88px;
+      padding: 72px 24px 80px;
       position: relative;
       overflow: hidden;
     }
@@ -102,28 +102,57 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(620px 340px at 82% 8%, rgba(201,168,76,0.16), transparent 70%);
+      background: radial-gradient(700px 420px at 78% 18%, rgba(201,168,76,0.14), transparent 72%);
       pointer-events: none;
     }
 
     .hero-inner {
-      max-width: 900px;
+      max-width: 1240px;
       margin: 0 auto;
-      text-align: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
       position: relative;
       z-index: 1;
     }
 
     .hero-logo {
-      height: 132px;
+      height: 104px;
       width: auto;
       display: block;
-      margin: 0 auto 26px;
+      margin-bottom: 24px;
+    }
+
+    .hero-figura {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 10px;
+      box-shadow: 0 26px 60px rgba(0,0,0,0.34);
+    }
+
+    .hero-figura img { width: 100%; display: block; border-radius: 9px; }
+
+    .hero-figura figcaption {
+      font-size: 0.78rem;
+      color: var(--gray);
+      text-align: center;
+      padding: 12px 8px 4px;
+      line-height: 1.5;
+    }
+
+    .hero-kicker {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 14px;
     }
 
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4.4vw, 3.1rem);
+      font-size: clamp(1.9rem, 3.2vw, 2.7rem);
       font-weight: 800;
       line-height: 1.16;
       letter-spacing: -0.01em;
@@ -133,11 +162,9 @@
     .hero h1 em { font-style: normal; color: var(--gold-light); }
 
     .hero p {
-      font-size: 1.06rem;
+      font-size: 1rem;
       line-height: 1.68;
       color: rgba(255,255,255,0.8);
-      max-width: 42em;
-      margin: 0 auto;
     }
 
     .hero-tagline {
@@ -150,11 +177,12 @@
 
     .hero-ctas {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 34px;
+      margin-top: 32px;
     }
+
+    .cta-final .hero-ctas { justify-content: center; }
 
     .btn {
       display: inline-block;
@@ -192,29 +220,6 @@
       font-size: 1rem;
       color: var(--gray);
       line-height: 1.66;
-    }
-
-    /* ===== Print do Word ===== */
-    .print { background: var(--off-white); }
-
-    .print-quadro {
-      max-width: 1000px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .print-quadro img {
-      width: 100%;
-      display: block;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      box-shadow: 0 26px 56px rgba(13,27,62,0.15);
-    }
-
-    .print-quadro figcaption {
-      font-size: 0.85rem;
-      color: var(--gray);
-      margin-top: 16px;
     }
 
     /* ===== Público ===== */
@@ -370,6 +375,15 @@
       line-height: 1.1;
     }
 
+    .plano-preco .rs {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.46em;
+      font-weight: 600;
+      vertical-align: 0.42em;
+      margin-right: 3px;
+      letter-spacing: 0;
+    }
+
     .plano-preco small {
       font-family: 'Inter', sans-serif;
       font-size: 0.8rem;
@@ -424,6 +438,11 @@
       .planos-grid { grid-template-columns: 1fr 1fr; }
     }
 
+    @media (max-width: 940px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-logo { margin-left: auto; margin-right: auto; }
+    }
+
     @media (max-width: 900px) {
       .publico-grid, .ciclo-grid { grid-template-columns: 1fr; }
       .analisa-grid { grid-template-columns: 1fr; }
@@ -457,27 +476,25 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <img src="../logo_masters_v2.png" alt="Logotipo do Rubric AI Masters" class="hero-logo" />
-    <h1>Orientação de monografias com IA, <em>versão após versão</em></h1>
-    <p>O Rubric AI Masters apoia orientadores e programas de pós-graduação na revisão de monografias de mestrado. A IA lê o trabalho, insere comentários nativos no próprio arquivo do Word, verifica a aderência ao projeto aprovado e acompanha a evolução ao longo das versões. O orientador revisa, ajusta e decide.</p>
-    <p class="hero-tagline">"A IA analisa. O professor decide."</p>
-    <div class="hero-ctas">
-      <a href="https://masters.rubricai.com.br" class="btn gold">Começar gratuitamente →</a>
-      <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20o%20Rubric%20AI%20Masters%20para%20o%20meu%20programa%20de%20p%C3%B3s-gradua%C3%A7%C3%A3o." class="btn vazado-claro" target="_blank" rel="noopener">Falar com especialista</a>
+    <div>
+      <img src="../logo_masters_v2.png" alt="Logotipo do Rubric AI Masters" class="hero-logo" />
+      <h1>Orientação de monografias com IA, <em>versão após versão</em></h1>
+      <p>O Rubric AI Masters apoia orientadores e programas de pós-graduação na revisão de monografias de mestrado. A IA lê o trabalho, insere comentários nativos no próprio arquivo do Word, verifica a aderência ao projeto aprovado e acompanha a evolução ao longo das versões. O orientador revisa, ajusta e decide.</p>
+      <p class="hero-tagline">"A IA analisa. O professor decide."</p>
+      <div class="hero-ctas">
+        <a href="https://masters.rubricai.com.br" class="btn gold">Começar gratuitamente →</a>
+        <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20o%20Rubric%20AI%20Masters%20para%20o%20meu%20programa%20de%20p%C3%B3s-gradua%C3%A7%C3%A3o." class="btn vazado-claro" target="_blank" rel="noopener">Falar com especialista</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="hero-kicker">Comentários nativos, dentro do arquivo do aluno</div>
+      <figure class="hero-figura">
+        <img src="../masters-comentarios.jpg" alt="Documento do Word aberto com comentários da IA na margem direita, assinados pelo professor, apontando ajustes no problema de pesquisa, nos objetivos e na justificativa" />
+        <figcaption>Arquivo real devolvido pela plataforma: comentários na margem, um por critério, com a justificativa do apontamento. Nada de relatório à parte — a IA devolve o mesmo <code>.docx</code>, pronto para revisar, editar ou apagar antes de enviar ao aluno.</figcaption>
+      </figure>
     </div>
   </div>
-</section>
-
-<!-- PRINT DO WORD -->
-<section class="print">
-  <div class="titulo">
-    <h2>Comentários nativos, dentro do arquivo do aluno</h2>
-    <p>Nada de relatório à parte. A IA devolve o mesmo <code>.docx</code>, com os comentários na margem, assinados com o nome do orientador — prontos para revisar, editar ou apagar antes de enviar ao aluno.</p>
-  </div>
-  <figure class="print-quadro">
-    <img src="../masters-comentarios.jpg" alt="Documento do Word aberto com comentários da IA na margem direita, assinados pelo professor, apontando ajustes no problema de pesquisa, nos objetivos e na justificativa" />
-    <figcaption>Arquivo real devolvido pela plataforma: comentários na margem, um por critério, com a justificativa do apontamento.</figcaption>
-  </figure>
 </section>
 
 <!-- PARA QUEM É -->
@@ -559,14 +576,14 @@
     <div class="plano">
       <div class="plano-nome">Gratuito</div>
       <div class="plano-qtd">3 monografias</div>
-      <div class="plano-preco">R$&thinsp;0</div>
+      <div class="plano-preco"><span class="rs">R$</span>0</div>
       <div class="plano-sub">Para experimentar</div>
       <a href="https://masters.rubricai.com.br" class="btn vazado-navy">Começar grátis</a>
     </div>
     <div class="plano">
       <div class="plano-nome">Básico</div>
       <div class="plano-qtd">15 monografias</div>
-      <div class="plano-preco">R$&thinsp;49<small>,90 por turma</small></div>
+      <div class="plano-preco"><span class="rs">R$</span>49<small>,90 por turma</small></div>
       <div class="plano-sub">Para orientadores</div>
       <a href="https://masters.rubricai.com.br" class="btn vazado-navy">Comprar pacote</a>
     </div>
@@ -574,14 +591,14 @@
       <div class="plano-badge">Mais popular</div>
       <div class="plano-nome">Profissional</div>
       <div class="plano-qtd">30 monografias</div>
-      <div class="plano-preco">R$&thinsp;79<small>,90 por turma</small></div>
+      <div class="plano-preco"><span class="rs">R$</span>79<small>,90 por turma</small></div>
       <div class="plano-sub">Para programas de pós</div>
       <a href="https://masters.rubricai.com.br" class="btn gold">Comprar pacote</a>
     </div>
     <div class="plano">
       <div class="plano-nome">Premium</div>
       <div class="plano-qtd">50 monografias</div>
-      <div class="plano-preco">R$&thinsp;109<small> por turma</small></div>
+      <div class="plano-preco"><span class="rs">R$</span>109<small> por turma</small></div>
       <div class="plano-sub">Para turmas grandes</div>
       <a href="https://masters.rubricai.com.br" class="btn vazado-navy">Comprar pacote</a>
     </div>
