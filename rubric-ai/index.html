@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rubric AI — Correção acadêmica assistida por IA, com a decisão final do professor</title>
+  <meta name="description" content="A Rubric AI analisa TCCs, papers e projetos com base na sua rubrica, sugere uma nota preliminar e justifica critério por critério. O professor revisa, ajusta e decide." />
+  <link rel="canonical" href="https://rubricai.com.br/rubric-ai/" />
+  <meta property="og:title" content="Rubric AI — Correção acadêmica assistida por IA" />
+  <meta property="og:description" content="Analise por rubrica, nota preliminar sugerida e justificativa por critério. A IA analisa. O professor decide." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rubricai.com.br/rubric-ai/" />
+  <meta property="og:image" content="https://rubricai.com.br/logo_purple.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0D1B3E;
+      --roxo: #7C3AED;
+      --roxo-dark: #6D28D9;
+      --roxo-deep: #5B21B6;
+      --roxo-light: #DDD6FE;
+      --roxo-wash: #F5F3FF;
+      --amber: #F59E0B;
+      --green: #16A34A;
+      --white: #FFFFFF;
+      --off-white: #F8FAFB;
+      --gray: #6B7280;
+      --border: #E5E7EB;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; }
+    a { color: inherit; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      height: 84px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-brand img { height: 62px; display: block; }
+    .nav-acoes { display: flex; align-items: center; gap: 10px; }
+
+    .nav-voltar {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gray);
+      text-decoration: none;
+      margin-right: 6px;
+    }
+    .nav-voltar:hover { color: var(--navy); }
+
+    .nav-btn {
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .nav-btn:hover { opacity: 0.88; }
+    .nav-btn.ghost { border: 1.5px solid var(--border); color: var(--navy); }
+    .nav-btn.roxo { background: var(--roxo); color: var(--white); }
+
+    /* ===== Botões ===== */
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.16s ease, opacity 0.16s ease;
+    }
+    .btn:hover { transform: translateY(-2px); opacity: 0.93; }
+    .btn.roxo { background: var(--roxo); color: var(--white); }
+    .btn.vazado { border: 1.5px solid #CFC4F0; color: var(--navy); }
+    .btn.vazado:hover { border-color: var(--roxo); color: var(--roxo-dark); }
+    .btn.vazado-claro { border: 1.5px solid rgba(255,255,255,0.34); color: var(--white); }
+
+    /* ===== HERO (claro, porque o logo tem fundo branco opaco) ===== */
+    .hero {
+      background: linear-gradient(120deg, #FFFFFF 0%, #FFFFFF 26%, #F3EFFE 62%, #E5DDFB 100%);
+      padding: 68px 24px 78px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 52px;
+      align-items: center;
+    }
+
+    .hero-logo { height: 104px; width: auto; display: block; margin-bottom: 22px; }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1.16;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em { font-style: normal; color: var(--roxo-dark); }
+
+    .hero p { font-size: 1rem; line-height: 1.68; color: #4B5563; }
+
+    .hero-nota {
+      margin-top: 20px;
+      padding-left: 14px;
+      border-left: 2px solid var(--roxo);
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+
+    .hero-figura {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 10px;
+      box-shadow: 0 26px 60px rgba(13,27,62,0.16);
+      border: 1px solid var(--border);
+    }
+
+    .hero-figura .zoom {
+      position: relative;
+      display: block;
+      cursor: zoom-in;
+      border-radius: 9px;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .hero-figura img { width: 100%; display: block; border-radius: 9px; transition: filter 0.2s ease; }
+
+    .hero-figura .zoom-selo {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(13,27,62,0.9);
+      color: var(--white);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 100px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+      transition: background 0.2s ease;
+    }
+
+    .hero-figura .zoom-selo svg { width: 15px; height: 15px; }
+    .hero-figura .zoom:hover img { filter: brightness(0.94); }
+    .hero-figura .zoom:hover .zoom-selo { background: var(--roxo); color: var(--white); }
+
+    .hero-figura figcaption {
+      font-size: 0.78rem;
+      color: var(--gray);
+      text-align: center;
+      padding: 12px 8px 4px;
+      line-height: 1.5;
+    }
+
+    .hero-figura figcaption a { color: var(--roxo-dark); text-decoration: underline; }
+
+    /* ===== Blocos ===== */
+    section { padding: 82px 24px; }
+
+    .titulo { max-width: 800px; margin: 0 auto 52px; text-align: center; }
+
+    .titulo h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .titulo p { font-size: 1rem; color: var(--gray); line-height: 1.66; }
+
+    /* ===== O que é ===== */
+    .sobre { background: var(--off-white); }
+
+    .sobre-texto {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .sobre-texto p {
+      font-size: 1.02rem;
+      color: #4B5563;
+      line-height: 1.75;
+      margin-bottom: 18px;
+    }
+
+    .sobre-frase {
+      max-width: 700px;
+      margin: 40px auto 0;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--roxo-deep);
+      line-height: 1.5;
+    }
+
+    /* ===== Benefícios ===== */
+    .beneficios-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .beneficio {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 30px 26px;
+      background: var(--white);
+    }
+
+    .beneficio-icone {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--roxo-wash);
+      color: var(--roxo-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .beneficio-icone svg { width: 22px; height: 22px; }
+    .beneficio h3 { font-size: 1.02rem; font-weight: 700; margin-bottom: 10px; }
+    .beneficio p { font-size: 0.9rem; color: #4B5563; line-height: 1.62; }
+
+    /* ===== Passos (sequência real: por isso são numerados) ===== */
+    .passos { background: var(--roxo-wash); }
+
+    .passos-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .passo {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--roxo);
+      border-radius: 14px;
+      padding: 28px 24px;
+    }
+
+    .passo-num {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--roxo-light);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+    }
+
+    .passo h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .passo p { font-size: 0.88rem; color: #4B5563; line-height: 1.6; }
+
+    .passos-nota {
+      max-width: 780px;
+      margin: 34px auto 0;
+      text-align: center;
+      font-size: 0.84rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ===== Casos de uso ===== */
+    .casos-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 40px;
+    }
+
+    .casos-grid li {
+      list-style: none;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.94rem;
+      color: #374151;
+    }
+
+    .casos-grid li span { color: var(--roxo-dark); font-weight: 700; }
+
+    /* ===== Limites e ética (bloco navy) ===== */
+    .limites {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .limites .titulo h2 { color: var(--white); }
+    .limites .titulo p { color: rgba(255,255,255,0.7); }
+
+    .limites-grid {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .limite {
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(221,214,254,0.18);
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+
+    .limite h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--roxo-light);
+      margin-bottom: 10px;
+    }
+
+    .limite p { font-size: 0.9rem; color: rgba(255,255,255,0.74); line-height: 1.64; }
+
+    .limites-frase {
+      max-width: 760px;
+      margin: 44px auto 0;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--roxo-light);
+      line-height: 1.5;
+    }
+
+    /* ===== Instituições ===== */
+    .inst-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .inst-texto h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .inst-texto p { font-size: 0.98rem; color: #4B5563; line-height: 1.7; margin-bottom: 26px; }
+
+    .inst-lista { list-style: none; }
+
+    .inst-lista li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.94rem;
+      color: #374151;
+    }
+
+    .inst-lista li span { color: var(--roxo-dark); font-weight: 700; }
+
+    /* ===== Planos ===== */
+    .planos { background: var(--off-white); }
+
+    .planos-grid {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .plano {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px 22px 26px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .plano.destaque {
+      border: 2px solid var(--roxo);
+      box-shadow: 0 18px 40px rgba(124,58,237,0.18);
+    }
+
+    .plano-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--roxo);
+      color: var(--white);
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .plano-nome { font-size: 1.05rem; font-weight: 700; }
+    .plano-qtd { font-size: 0.84rem; color: var(--gray); margin-bottom: 18px; }
+
+    .plano-preco {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.15rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .plano-preco .rs {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.46em;
+      font-weight: 600;
+      vertical-align: 0.42em;
+      margin-right: 3px;
+    }
+
+    .plano-preco small {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--gray);
+    }
+
+    .plano-sub { font-size: 0.82rem; color: var(--gray); margin: 8px 0 22px; }
+    .plano .btn { margin-top: auto; padding: 12px 18px; font-size: 0.86rem; }
+
+    .planos-nota {
+      max-width: 780px;
+      margin: 34px auto 0;
+      text-align: center;
+      font-size: 0.84rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .planos-nota a { color: var(--roxo-dark); font-weight: 600; text-decoration: underline; }
+
+    /* ===== CTA final ===== */
+    .cta-final {
+      background: linear-gradient(140deg, #5B21B6 0%, #7C3AED 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta-final h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-final p { color: rgba(255,255,255,0.82); max-width: 34em; margin: 0 auto 32px; }
+    .cta-final .hero-ctas { justify-content: center; }
+    .cta-final .btn.roxo { background: var(--white); color: var(--roxo-deep); }
+
+    /* ===== Rodapé ===== */
+    footer {
+      background: #060D22;
+      color: rgba(255,255,255,0.6);
+      padding: 44px 24px;
+      text-align: center;
+      font-size: 0.84rem;
+    }
+
+    footer a { color: rgba(255,255,255,0.72); text-decoration: none; }
+    footer a:hover { color: var(--roxo-light); }
+    footer .links { margin-bottom: 14px; display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; }
+
+    /* ===== Responsivo ===== */
+    @media (max-width: 1024px) {
+      .planos-grid { grid-template-columns: 1fr 1fr; }
+      .beneficios-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 940px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-logo { margin-left: auto; margin-right: auto; }
+      .inst-inner { grid-template-columns: 1fr; gap: 34px; }
+    }
+
+    @media (max-width: 900px) {
+      .beneficios-grid, .passos-grid, .limites-grid { grid-template-columns: 1fr; }
+      .casos-grid { grid-template-columns: 1fr; }
+      .nav-voltar { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      section { padding: 60px 20px; }
+      .planos-grid { grid-template-columns: 1fr; max-width: 420px; }
+      .nav-inner { height: 72px; }
+      .nav-brand img { height: 52px; }
+      .hero-logo { height: 88px; }
+      .nav-btn.ghost { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand"><img src="../logo_purple.png" alt="Rubric AI — página inicial" /></a>
+    <div class="nav-acoes">
+      <a href="../#produtos" class="nav-voltar">← Todos os produtos</a>
+      <a href="https://app.rubricai.com.br" class="nav-btn ghost">Entrar</a>
+      <a href="https://app.rubricai.com.br/register" class="nav-btn roxo">Começar grátis</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <img src="../logo_purple.png" alt="Logotipo da Rubric AI" class="hero-logo" />
+      <h1>A correção acadêmica para quem <em>valoriza critério</em> e decide a nota</h1>
+      <p>A Rubric AI lê o trabalho do aluno com base na rubrica que você já usa, marca cada critério como atendido ou não atendido, sugere uma nota preliminar e escreve a justificativa de cada marcação. Você revisa, ajusta o que discordar e fecha a nota. Serve para TCCs, papers, monografias e projetos.</p>
+      <p class="hero-nota">A IA analisa. O professor decide. Nenhuma nota é fechada automaticamente — o professor sempre revisa e aprova antes de finalizar o resultado.</p>
+      <div class="hero-ctas">
+        <a href="https://app.rubricai.com.br/register" class="btn roxo">Começar grátis — 3 correções/mês →</a>
+        <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20a%20Rubric%20AI%20para%20a%20minha%20institui%C3%A7%C3%A3o." class="btn vazado" target="_blank" rel="noopener">Falar com especialista</a>
+      </div>
+    </div>
+
+    <div>
+      <figure class="hero-figura">
+        <a href="../tela-rubric-ai.jpg" target="_blank" rel="noopener" class="zoom" aria-label="Abrir a imagem em tamanho real">
+          <img src="../tela-rubric-ai.jpg" alt="Tela de correção da Rubric AI: nota preliminar sugerida, contagem de critérios atendidos e lista de critérios avaliados individualmente, cada um com sua justificativa" />
+          <span class="zoom-selo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>
+            Ver em tamanho real
+          </span>
+        </a>
+        <figcaption>Análise real da plataforma. A nota preliminar e as justificativas são apresentadas ao professor, que revisa cada critério antes de finalizar o resultado. <a href="../tela-rubric-ai.jpg" target="_blank" rel="noopener">Clique para ampliar.</a></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE É -->
+<section class="sobre">
+  <div class="titulo">
+    <h2>O que é a Rubric AI</h2>
+  </div>
+  <div class="sobre-texto">
+    <p>Corrigir um TCC bem feito leva tempo. Ler o texto inteiro, conferir cada exigência da rubrica, escrever um retorno que ajude o aluno a melhorar e ainda manter o mesmo padrão entre o primeiro e o trigésimo trabalho da pilha — tudo isso no intervalo entre duas aulas.</p>
+    <p>A Rubric AI faz a primeira passagem. Ela lê o documento, confronta o texto com cada critério da rubrica, aponta o que foi cumprido e o que ficou faltando, e explica o porquê de cada apontamento. O que chega até você não é um número solto: é uma análise que você pode conferir, contestar e corrigir, item por item.</p>
+    <p>Nada é publicado sem a sua revisão. A nota que vai para o aluno é a nota que você aprovou.</p>
+    <p class="sobre-frase">A tarefa que a IA assume é a leitura repetitiva. A que continua sua é o julgamento.</p>
+  </div>
+</section>
+
+<!-- BENEFÍCIOS -->
+<section>
+  <div class="titulo">
+    <h2>O que muda na sua rotina</h2>
+    <p>Seis coisas que a plataforma resolve, e que você provavelmente faz hoje no braço.</p>
+  </div>
+  <div class="beneficios-grid">
+    <div class="beneficio">
+      <div class="beneficio-icone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      </div>
+      <h3>A primeira passagem, em minutos</h3>
+      <p>A análise preliminar de um trabalho fica pronta em cerca de dois minutos. O tempo que você economiza é o da leitura mecânica, não o da avaliação.</p>
+    </div>
+    <div class="beneficio">
+      <div class="beneficio-icone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+      </div>
+      <h3>Avaliação pela sua rubrica</h3>
+      <p>A análise segue os critérios que a sua instituição já adota. Não é uma régua genérica de qualidade textual imposta de fora.</p>
+    </div>
+    <div class="beneficio">
+      <div class="beneficio-icone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg>
+      </div>
+      <h3>Critério por critério</h3>
+      <p>Cada item aparece marcado como atendido ou não atendido, com a passagem do trabalho que sustenta a marcação. Nada de nota fechada sem explicação.</p>
+    </div>
+    <div class="beneficio">
+      <div class="beneficio-icone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>
+      </div>
+      <h3>Feedback que o aluno aproveita</h3>
+      <p>A justificativa de cada critério vira retorno escrito. O aluno entende o que precisa mudar, em vez de receber apenas um número.</p>
+    </div>
+    <div class="beneficio">
+      <div class="beneficio-icone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+      </div>
+      <h3>Leitura de PDF e Word</h3>
+      <p>Envie o arquivo como o aluno entregou. A plataforma lê o documento inclusive quando o conteúdo depende do que está na página, e não só do texto extraído.</p>
+    </div>
+    <div class="beneficio">
+      <div class="beneficio-icone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l8 4v5c0 5-3.4 8.2-8 9-4.6-.8-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <h3>Revisão e aprovação sua</h3>
+      <p>Você pode discordar da IA em qualquer critério. Ao alterar uma marcação, a nota e a planilha são recalculadas para refletir a sua decisão.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="passos">
+  <div class="titulo">
+    <h2>Do PDF do aluno à nota validada, em três passos</h2>
+    <p>O fluxo é sempre o mesmo, do primeiro trabalho ao último da turma.</p>
+  </div>
+  <div class="passos-grid">
+    <div class="passo">
+      <div class="passo-num">PASSO 1</div>
+      <h3>Envio</h3>
+      <p>Você envia o trabalho em PDF ou Word e escolhe a rubrica que vai orientar a análise.</p>
+    </div>
+    <div class="passo">
+      <div class="passo-num">PASSO 2</div>
+      <h3>Análise</h3>
+      <p>A IA percorre o documento critério a critério, marca o que foi atendido, escreve a justificativa de cada marcação e sugere uma nota preliminar.</p>
+    </div>
+    <div class="passo">
+      <div class="passo-num">PASSO 3</div>
+      <h3>Revisão e nota</h3>
+      <p>Você confere item por item, ajusta o que discordar e aprova. A nota final e a planilha refletem a sua decisão, não a da IA.</p>
+    </div>
+  </div>
+  <p class="passos-nota">Enquanto não houver aprovação do professor, a correção permanece como rascunho. Nenhum resultado chega ao aluno automaticamente.</p>
+</section>
+
+<!-- CASOS DE USO -->
+<section>
+  <div class="titulo">
+    <h2>Onde a Rubric AI é usada</h2>
+    <p>Sempre que existe uma rubrica e uma pilha de trabalhos para ler.</p>
+  </div>
+  <ul class="casos-grid">
+    <li><span>✓</span> Trabalhos de conclusão de curso (TCC)</li>
+    <li><span>✓</span> Artigos e papers acadêmicos</li>
+    <li><span>✓</span> Projetos de pesquisa e de extensão</li>
+    <li><span>✓</span> Atividades avaliativas ao longo do semestre</li>
+    <li><span>✓</span> Relatórios de estágio e de prática</li>
+    <li><span>✓</span> Correção de turmas grandes, com padrão único</li>
+    <li><span>✓</span> Bancas com mais de um avaliador</li>
+    <li><span>✓</span> Devolutivas de revisão, entre versões do trabalho</li>
+  </ul>
+</section>
+
+<!-- LIMITES E ÉTICA -->
+<section class="limites">
+  <div class="titulo">
+    <h2>A Rubric AI não substitui o professor</h2>
+    <p>Esta seção existe porque o contrário disso seria um produto pior, e uma promessa desonesta.</p>
+  </div>
+  <div class="limites-grid">
+    <div class="limite">
+      <h3>Não fecha nota sozinha</h3>
+      <p>A nota é preliminar até que você a aprove. A plataforma não envia resultado ao aluno, não lança nota em sistema acadêmico e não decide aprovação.</p>
+    </div>
+    <div class="limite">
+      <h3>Não conhece o aluno</h3>
+      <p>Trajetória, contexto, esforço, condições de entrega e histórico da orientação estão fora do alcance da análise. Estão dentro do alcance do professor.</p>
+    </div>
+    <div class="limite">
+      <h3>Não é infalível</h3>
+      <p>A IA erra, e por isso mostra a justificativa de cada marcação — para que o erro seja visível e corrigível, e não engolido junto com a nota.</p>
+    </div>
+  </div>
+  <p class="limites-frase">Uma correção defensável é aquela em que alguém pode perguntar por quê, e existe resposta.</p>
+</section>
+
+<!-- INSTITUIÇÕES -->
+<section>
+  <div class="inst-inner">
+    <div class="inst-texto">
+      <h2>Para coordenações e instituições</h2>
+      <p>Quando vários professores corrigem a mesma disciplina, a diferença entre eles vira reclamação de aluno e retrabalho de coordenação. A Rubric AI aplica a mesma rubrica para todos e deixa registrado o motivo de cada marcação.</p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20plano%20institucional%20da%20Rubric%20AI." class="btn roxo" target="_blank" rel="noopener">Solicitar demonstração institucional →</a>
+      </div>
+    </div>
+    <div>
+      <ul class="inst-lista">
+        <li><span>✓</span> Rubrica institucional aplicada de forma uniforme</li>
+        <li><span>✓</span> Justificativa registrada critério a critério</li>
+        <li><span>✓</span> Padrão comparável entre professores e turmas</li>
+        <li><span>✓</span> Integração com o Rubric Detect IA, na mesma conta</li>
+        <li><span>✓</span> Condições por volume, sob consulta</li>
+        <li><span>✓</span> Tratamento de dados conforme a LGPD</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section class="planos" id="planos">
+  <div class="titulo">
+    <h2>Planos e preços</h2>
+    <p>Comece grátis. Escale conforme sua demanda.</p>
+  </div>
+  <div class="planos-grid">
+    <div class="plano">
+      <div class="plano-nome">Gratuito</div>
+      <div class="plano-qtd">3 correções/mês</div>
+      <div class="plano-preco"><span class="rs">R$</span>0<small>/mês</small></div>
+      <div class="plano-sub">Para experimentar</div>
+      <a href="https://app.rubricai.com.br/register" class="btn vazado">Começar grátis</a>
+    </div>
+    <div class="plano">
+      <div class="plano-nome">Básico</div>
+      <div class="plano-qtd">30 correções/mês</div>
+      <div class="plano-preco"><span class="rs">R$</span>39<small>,90/mês</small></div>
+      <div class="plano-sub">Ideal para professores</div>
+      <a href="https://app.rubricai.com.br/register" class="btn vazado">Assinar</a>
+    </div>
+    <div class="plano destaque">
+      <div class="plano-badge">Mais popular</div>
+      <div class="plano-nome">Profissional</div>
+      <div class="plano-qtd">50 correções/mês</div>
+      <div class="plano-preco"><span class="rs">R$</span>69<small>,90/mês</small></div>
+      <div class="plano-sub">Para coordenadores</div>
+      <a href="https://app.rubricai.com.br/register" class="btn roxo">Assinar</a>
+    </div>
+    <div class="plano">
+      <div class="plano-nome">Premium</div>
+      <div class="plano-qtd">90 correções/mês</div>
+      <div class="plano-preco"><span class="rs">R$</span>99<small>/mês</small></div>
+      <div class="plano-sub">Para departamentos</div>
+      <a href="https://app.rubricai.com.br/register" class="btn vazado">Assinar</a>
+    </div>
+  </div>
+  <p class="planos-nota">Volumes acima do plano Premium são atendidos sob consulta. <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20falar%20com%20vendas%20sobre%20a%20Rubric%20AI%20para%20a%20minha%20equipe." target="_blank" rel="noopener">Fale com vendas</a> para condições por equipe ou instituição.</p>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <h2>Corrija três trabalhos sem pagar nada</h2>
+  <p>Envie um TCC que você já corrigiu e compare. Se a análise não fizer sentido para o seu curso, você não perdeu nada além de dois minutos.</p>
+  <div class="hero-ctas">
+    <a href="https://app.rubricai.com.br/register" class="btn roxo">Começar grátis →</a>
+    <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20da%20Rubric%20AI." class="btn vazado-claro" target="_blank" rel="noopener">Agendar demonstração</a>
+  </div>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="../">Início</a>
+    <a href="../#produtos">Produtos</a>
+    <a href="../#planos">Planos</a>
+    <a href="../#seguranca">Segurança</a>
+    <a href="../#contato">Contato</a>
+    <a href="../privacidade.html">Política de Privacidade</a>
+  </div>
+  <p>© 2026 Rubric AI · Prompty Soluções · João Pessoa/PB · CNPJ 46.595.694/0001-58</p>
+</footer>
+
+</body>
+</html>
