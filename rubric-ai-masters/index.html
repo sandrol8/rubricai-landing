@@ -110,8 +110,8 @@
       max-width: 1240px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 48px;
       align-items: center;
       position: relative;
       z-index: 1;
@@ -132,6 +132,8 @@
     }
 
     .hero-figura img { width: 100%; display: block; border-radius: 9px; }
+    .hero-figura a { display: block; cursor: zoom-in; }
+    .hero-figura figcaption a { color: var(--gold-dark); text-decoration: underline; cursor: pointer; }
 
     .hero-figura figcaption {
       font-size: 0.78rem;
@@ -490,8 +492,10 @@
     <div>
       <div class="hero-kicker">Comentários nativos, dentro do arquivo do aluno</div>
       <figure class="hero-figura">
-        <img src="../masters-comentarios.jpg" alt="Documento do Word aberto com comentários da IA na margem direita, assinados pelo professor, apontando ajustes no problema de pesquisa, nos objetivos e na justificativa" />
-        <figcaption>Arquivo real devolvido pela plataforma: comentários na margem, um por critério, com a justificativa do apontamento. Nada de relatório à parte — a IA devolve o mesmo <code>.docx</code>, pronto para revisar, editar ou apagar antes de enviar ao aluno.</figcaption>
+        <a href="../masters-comentarios.jpg" target="_blank" rel="noopener" aria-label="Abrir a imagem em tamanho real">
+          <img src="../masters-comentarios.jpg" alt="Documento do Word aberto com comentários da IA na margem direita, assinados pelo professor, apontando ajustes no problema de pesquisa, nos objetivos e na justificativa" />
+        </a>
+        <figcaption>Arquivo real devolvido pela plataforma: comentários na margem, um por critério, com a justificativa do apontamento. <a href="../masters-comentarios.jpg" target="_blank" rel="noopener">Clique para ampliar.</a></figcaption>
       </figure>
     </div>
   </div>
