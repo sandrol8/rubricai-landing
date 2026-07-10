@@ -3,8 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rubric AI — A IA analisa. O professor decide.</title>
-  <meta name="description" content="Plataforma brasileira de correção acadêmica assistida por IA para professores universitários. TCCs, papers, monografias de mestrado e detecção de conteúdo gerado por IA." />
+  <title>Rubric AI — Correção acadêmica com IA para professores e instituições</title>
+  <meta name="description" content="Plataforma brasileira de avaliação acadêmica com IA. Corrija TCCs, monografias, artigos e atividades por rubrica, gere feedback estruturado e analise originalidade. A IA analisa. O professor decide." />
+  <link rel="canonical" href="https://rubricai.com.br/" />
+  <meta property="og:title" content="Rubric AI — Correção acadêmica com IA" />
+  <meta property="og:description" content="Corrija, revise e analise trabalhos acadêmicos com mais rapidez, padrão e segurança. A IA analisa. O professor decide." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rubricai.com.br/" />
+  <meta property="og:image" content="https://rubricai.com.br/logo_purple.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
   <style>
@@ -54,14 +60,14 @@
     .nav-inner {
       max-width: 1180px;
       margin: 0 auto;
-      height: 64px;
+      height: 100px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .nav-brand { display: flex; align-items: center; text-decoration: none; }
-    .nav-brand img { height: 48px; display: block; }
+    .nav-brand img { height: 80px; display: block; }
 
     .nav-links {
       display: flex;
@@ -112,7 +118,7 @@
 
     /* HERO */
     .hero {
-      padding: 128px 24px 88px;
+      padding: 168px 24px 88px;
       background: linear-gradient(160deg, #FAF5FF 0%, #FFFFFF 50%, #FFF8E7 100%);
     }
 
@@ -129,11 +135,11 @@
       display: inline-block;
       background: var(--purple);
       color: var(--white);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 6px 16px;
+      padding: 9px 22px;
       border-radius: 100px;
       margin-bottom: 24px;
     }
@@ -345,25 +351,9 @@
       margin: 0 auto;
     }
 
-    /* Palco: foto do apresentador sangrando à esquerda, cards por cima */
-    .produtos-stage {
-      max-width: 1320px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 33% 1fr;
-      align-items: end;          /* a base da foto encosta na base dos cards */
-    }
-
-    .produtos-foto {
-      width: 100%;
-      height: auto;
-      display: block;
-      margin-right: -8px;        /* a borda reta da foto desliza para baixo do 1o card */
-      pointer-events: none;
-      user-select: none;
-    }
-
     .produtos-grid {
+      max-width: 1240px;
+      margin: 0 auto;
       position: relative;
       z-index: 1;                /* cards por cima da foto */
       display: grid;
@@ -889,14 +879,11 @@
 
     @media (max-width: 1024px) {
       .tech-grid { grid-template-columns: 1fr 1fr; }
-      /* Abaixo desta largura a foto ocuparia espaço demais */
-      .produtos-stage { display: block; }
-      .produtos-foto { display: none; }
     }
 
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .hero { text-align: center; padding-top: 112px; }
+      .hero { text-align: center; padding-top: 132px; }
       .hero-sub { margin-left: auto; margin-right: auto; }
       .hero-ctas { justify-content: center; }
       .seg-grid { grid-template-columns: 1fr; }
@@ -905,6 +892,8 @@
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
+      .nav-inner { height: 72px; }
+      .nav-brand img { height: 54px; }
       .steps { grid-template-columns: 1fr; }
       .planos-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr; text-align: center; }
@@ -913,6 +902,280 @@
 
     @media (max-width: 480px) {
       .planos-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Submenu de produtos ===== */
+    .nav-drop { position: relative; }
+
+    .nav-drop > a::after {
+      content: '▾';
+      font-size: 0.7em;
+      margin-left: 5px;
+      opacity: 0.6;
+    }
+
+    .nav-drop-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(6px);
+      min-width: 290px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 18px 40px rgba(13,27,62,0.14);
+      padding: 8px;
+      list-style: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.16s ease, transform 0.16s ease;
+      z-index: 30;
+    }
+
+    .nav-drop:hover .nav-drop-menu,
+    .nav-drop:focus-within .nav-drop-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .nav-drop-menu a {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 9px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .nav-drop-menu a span {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 400;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    .nav-drop-menu a:hover { background: var(--light-gray); }
+    .nav-drop-menu li.is-purple a:hover { color: var(--purple); }
+    .nav-drop-menu li.is-gold a:hover   { color: #8A6D1F; }
+    .nav-drop-menu li.is-teal a:hover   { color: #0E7C8B; }
+
+    .nav-btn.is-ghost {
+      background: transparent;
+      color: var(--navy);
+      border: 1.5px solid var(--border);
+    }
+    .nav-btn.is-ghost:hover { color: var(--purple); border-color: var(--purple); }
+
+    /* ===== Dobra ===== */
+    .hero-reforco {
+      font-size: 0.95rem;
+      color: var(--gray);
+      margin-top: 18px;
+      line-height: 1.55;
+      max-width: 34em;
+    }
+
+    .fluxo-legenda {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.55;
+      margin-top: 14px;
+      text-align: center;
+      max-width: 32em;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .fluxo { width: 100%; height: auto; display: block; }
+
+    /* ===== Cards de benefício ===== */
+    .beneficios {
+      padding: 80px 24px;
+      background: var(--light-gray);
+    }
+
+    .beneficios-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .beneficio {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 30px 26px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .beneficio:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 34px rgba(13,27,62,0.08);
+    }
+
+    .beneficio-icone {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+    }
+
+    .beneficio-icone svg { width: 23px; height: 23px; }
+
+    .beneficio h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .beneficio p {
+      font-size: 0.875rem;
+      color: #4B5563;
+      line-height: 1.62;
+    }
+
+    .beneficio-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    /* ===== Print da plataforma dentro de Como funciona ===== */
+    .como-print {
+      max-width: 900px;
+      margin: 56px auto 0;
+      text-align: center;
+    }
+
+    .como-print img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 50px rgba(13,27,62,0.13);
+    }
+
+    .como-print p {
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin-top: 14px;
+    }
+
+    @media (max-width: 1024px) {
+      .beneficios-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .beneficios-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Faixa Rubric Detect IA ===== */
+    .integridade {
+      background: linear-gradient(120deg, #FFFFFF 0%, #FFFFFF 28%, #EDF8FB 62%, #DAF0F6 100%);
+      color: var(--navy);
+      padding: 76px 24px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .integridade::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(560px 320px at 88% 12%, rgba(20,184,204,0.16), transparent 70%);
+      pointer-events: none;
+    }
+
+    .integridade-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .integridade-logo {
+      height: 100px;
+      width: auto;
+      display: block;
+      margin-bottom: 22px;
+    }
+
+    .integridade h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.85rem, 3.1vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .integridade h2 em {
+      font-style: normal;
+      color: var(--teal-dark);
+    }
+
+    .integridade p {
+      font-size: 1rem;
+      line-height: 1.68;
+      color: #4B5563;
+      max-width: 36em;
+    }
+
+    .integridade-nota {
+      margin-top: 22px;
+      padding-left: 14px;
+      border-left: 2px solid var(--teal);
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--gray);
+    }
+
+    .integridade-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .integridade-btn {
+      display: inline-block;
+      padding: 14px 26px;
+      border-radius: 100px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition: transform 0.16s ease, opacity 0.16s ease;
+    }
+
+    .integridade-btn:hover { transform: translateY(-2px); opacity: 0.92; }
+    .integridade-btn.solida { background: var(--teal-dark); color: var(--white); }
+    .integridade-btn.vazada { border: 1.5px solid #B6D9E1; color: var(--navy); }
+    .integridade-btn.vazada:hover { border-color: var(--teal-dark); color: var(--teal-dark); }
+
+    .integridade-visual svg { width: 100%; height: auto; display: block; }
+
+    @media (max-width: 900px) {
+      .integridade-inner { grid-template-columns: 1fr; gap: 40px; }
+      .integridade { padding: 60px 24px; }
     }
   </style>
 </head>
@@ -923,14 +1186,21 @@
   <div class="nav-inner">
     <a href="#" class="nav-brand"><img src="logo_purple.png" alt="Rubric AI — A IA analisa. O professor decide." /></a>
     <ul class="nav-links">
-      <li class="nav-link-texto"><a href="#tecnologia">Tecnologia</a></li>
-      <li class="nav-link-texto"><a href="#produtos">Produtos</a></li>
+      <li class="nav-link-texto"><a href="#">Início</a></li>
+      <li class="nav-link-texto nav-drop">
+        <a href="#produtos">Produtos</a>
+        <ul class="nav-drop-menu">
+          <li class="is-purple"><a href="https://app.rubricai.com.br">Rubric AI<span>Correção acadêmica assistida por IA</span></a></li>
+          <li class="is-gold"><a href="https://masters.rubricai.com.br">Rubric AI Masters<span>Orientação e revisão de monografias</span></a></li>
+          <li class="is-teal"><a href="https://app.rubricai.com.br/deteccao-ia">Rubric Detect IA<span>Originalidade, similaridade e indícios de uso de IA</span></a></li>
+        </ul>
+      </li>
       <li class="nav-link-texto"><a href="#como">Como funciona</a></li>
       <li class="nav-link-texto"><a href="#planos">Planos</a></li>
+      <li class="nav-link-texto"><a href="#seguranca">Segurança</a></li>
       <li class="nav-link-texto"><a href="#contato">Contato</a></li>
-      <li><a href="https://app.rubricai.com.br" class="nav-btn is-purple">Rubric AI</a></li>
-      <li><a href="https://masters.rubricai.com.br" class="nav-btn is-gold">Masters</a></li>
-      <li><a href="https://app.rubricai.com.br/deteccao-ia" class="nav-btn is-teal">Detect IA</a></li>
+      <li><a href="https://app.rubricai.com.br" class="nav-btn is-ghost">Entrar</a></li>
+      <li><a href="https://app.rubricai.com.br/register" class="nav-btn is-purple">Começar grátis</a></li>
     </ul>
   </div>
 </nav>
@@ -939,18 +1209,281 @@
 <section class="hero">
   <div class="hero-grid">
     <div>
-      <div class="hero-eyebrow">Correção Acadêmica com IA</div>
-      <h1>Corrija TCCs em <em>minutos</em>, não em fins de semana</h1>
-      <p class="hero-sub">A IA avalia cada trabalho critério a critério, com feedback estruturado e nota calculada — e você revisa, ajusta e aprova. O controle é sempre do professor.</p>
+      <div class="hero-eyebrow">Plataforma brasileira de avaliação acadêmica com IA</div>
+      <h1>Corrija, revise e analise trabalhos acadêmicos com mais <em>rapidez, padrão e segurança</em></h1>
+      <p class="hero-sub">A Rubric AI ajuda professores e instituições a corrigirem TCCs, monografias, artigos, projetos e atividades avaliativas com apoio de inteligência artificial. A plataforma aplica critérios, gera feedback estruturado, sugere notas e identifica indícios de baixa originalidade ou uso inadequado de IA — sempre com decisão final do professor.</p>
       <div class="hero-ctas">
-        <a href="https://app.rubricai.com.br" class="hero-btn primary">Começar grátis →</a>
-        <a href="https://wa.me/5511944773623?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20institucional%20do%20Rubric%20AI." class="hero-btn secondary" target="_blank" rel="noopener">Agendar demonstração institucional</a>
+        <a href="https://app.rubricai.com.br/register" class="hero-btn primary">Começar gratuitamente →</a>
+        <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20institucional%20da%20Rubric%20AI." class="hero-btn secondary" target="_blank" rel="noopener">Agendar demonstração institucional</a>
       </div>
+      <p class="hero-reforco">Menos tempo em tarefas repetitivas. Mais tempo para orientar, avaliar e decidir.</p>
       <p class="hero-tagline">"A IA analisa. O professor decide."</p>
     </div>
     <div class="hero-visual">
-      <img src="tela%20Rucric%20ai.png" alt="Tela de correção do Rubric AI mostrando a nota final e os critérios avaliados de um trabalho acadêmico" class="hero-screenshot" />
-      <p class="hero-caption">Tela real da plataforma: nota final e critérios avaliados um a um.</p>
+      <svg class="fluxo" viewBox="0 0 520 660" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Fluxo da plataforma: trabalho enviado, análise por critérios, feedback e decisão do professor">
+
+        <!-- Painel 1: Trabalho enviado -->
+        <g>
+          <rect x="20" y="16" width="480" height="150" rx="18" fill="#FFFFFF" stroke="#E5E7EB"/>
+          <rect x="20" y="16" width="480" height="46" rx="18" fill="#F3F4F6"/>
+          <rect x="20" y="46" width="480" height="16" fill="#F3F4F6"/>
+          <circle cx="44" cy="39" r="5" fill="#7C3AED"/>
+          <text x="60" y="44" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#0D1B3E">1. Trabalho enviado</text>
+
+          <rect x="44" y="84" width="60" height="60" rx="10" fill="#EDE9FE"/>
+          <path d="M60 98h20l10 10v22a4 4 0 0 1-4 4H60a4 4 0 0 1-4-4v-28a4 4 0 0 1 4-4z" fill="#7C3AED"/>
+          <path d="M80 98v10h10" fill="#C4B5FD"/>
+          <text x="122" y="107" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#0D1B3E">monografia.pdf</text>
+          <text x="122" y="129" font-family="Inter, sans-serif" font-size="12.5" fill="#6B7280">Upload em PDF ou Word</text>
+        </g>
+
+        <path d="M260 166v30" stroke="#D1D5DB" stroke-width="2"/>
+        <path d="M254 190l6 8 6-8" fill="none" stroke="#D1D5DB" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- Painel 2: Análise por critérios -->
+        <g>
+          <rect x="20" y="206" width="480" height="222" rx="18" fill="#FFFFFF" stroke="#E5E7EB"/>
+          <rect x="20" y="206" width="480" height="46" rx="18" fill="#F3F4F6"/>
+          <rect x="20" y="236" width="480" height="16" fill="#F3F4F6"/>
+          <circle cx="44" cy="229" r="5" fill="#7C3AED"/>
+          <text x="60" y="234" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#0D1B3E">2. Análise por critérios</text>
+
+          <g font-family="Inter, sans-serif" font-size="13" fill="#374151">
+            <circle cx="52" cy="280" r="9" fill="#DCFCE7"/>
+            <path d="M48 280l3 3 5-6" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="70" y="285">Objetivos claros e delimitados</text>
+            <line x1="44" y1="298" x2="476" y2="298" stroke="#F3F4F6"/>
+
+            <circle cx="52" cy="320" r="9" fill="#DCFCE7"/>
+            <path d="M48 320l3 3 5-6" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="70" y="325">Metodologia coerente com a proposta</text>
+            <line x1="44" y1="338" x2="476" y2="338" stroke="#F3F4F6"/>
+
+            <circle cx="52" cy="360" r="9" fill="#FEF3C7"/>
+            <path d="M52 356v4M52 364v.5" stroke="#B45309" stroke-width="2" stroke-linecap="round"/>
+            <text x="70" y="365">Referências incompletas</text>
+            <line x1="44" y1="378" x2="476" y2="378" stroke="#F3F4F6"/>
+
+            <circle cx="52" cy="400" r="9" fill="#CFFAFE"/>
+            <path d="M48.5 400l3 3 5-6" fill="none" stroke="#0E7C8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="70" y="405" fill="#0E7C8B" font-weight="600">Rubric Detect IA: sinais de atenção</text>
+          </g>
+        </g>
+
+        <path d="M260 428v30" stroke="#D1D5DB" stroke-width="2"/>
+        <path d="M254 452l6 8 6-8" fill="none" stroke="#D1D5DB" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- Painel 3: Feedback e decisão docente -->
+        <g>
+          <rect x="20" y="468" width="480" height="176" rx="18" fill="#FFFFFF" stroke="#E5E7EB"/>
+          <rect x="20" y="468" width="480" height="46" rx="18" fill="#0D1B3E"/>
+          <rect x="20" y="498" width="480" height="16" fill="#0D1B3E"/>
+          <circle cx="44" cy="491" r="5" fill="#FBBF24"/>
+          <text x="60" y="496" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">3. Feedback e decisão docente</text>
+
+          <text x="44" y="546" font-family="Inter, sans-serif" font-size="12.5" fill="#6B7280">Nota sugerida</text>
+          <text x="44" y="580" font-family="Playfair Display, serif" font-size="34" font-weight="800" fill="#0D1B3E">8,5</text>
+          <text x="108" y="580" font-family="Inter, sans-serif" font-size="13" fill="#6B7280">com justificativa por critério</text>
+
+          <rect x="292" y="556" width="88" height="38" rx="10" fill="#FFFFFF" stroke="#D1D5DB"/>
+          <text x="336" y="580" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0D1B3E" text-anchor="middle">Revisar</text>
+
+          <rect x="392" y="556" width="88" height="38" rx="10" fill="#7C3AED"/>
+          <text x="436" y="580" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">Aprovar</text>
+
+          <text x="44" y="620" font-family="Inter, sans-serif" font-size="12" fill="#9CA3AF">Nada é finalizado sem a validação do professor.</text>
+        </g>
+      </svg>
+      <p class="fluxo-legenda">Da leitura à devolutiva: a Rubric AI organiza a análise critério por critério, gera feedback claro e mantém o professor no controle da decisão final.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAIXA RUBRIC DETECT IA -->
+<section class="integridade">
+  <div class="integridade-inner">
+    <div>
+      <img src="rubric_detect_ia_logo.png" alt="Logotipo do Rubric Detect IA" class="integridade-logo" />
+      <h2>Verifique a originalidade <em>antes</em> de dar a nota — sem sair da correção</h2>
+      <p>O Rubric Detect IA lê o trabalho trecho por trecho e aponta similaridade textual, baixa originalidade e indícios de escrita artificial. O resultado chega como relatório de apoio à decisão, junto da rubrica, enquanto você ainda está avaliando.</p>
+      <p class="integridade-nota">Indicador probabilístico, nunca prova. Serve para orientar investigação, diálogo e revisão — nunca para punição automática. Quem decide é o professor.</p>
+      <div class="integridade-ctas">
+        <a href="https://app.rubricai.com.br/deteccao-ia" class="integridade-btn solida">Conhecer o Rubric Detect IA →</a>
+        <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20falar%20com%20um%20especialista%20sobre%20o%20Rubric%20Detect%20IA." class="integridade-btn vazada" target="_blank" rel="noopener">Falar com especialista</a>
+      </div>
+    </div>
+
+    <div class="integridade-visual">
+      <svg viewBox="0 0 460 360" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Trecho de um trabalho com um parágrafo marcado como sinal de atenção e uma barra de três zonas indicando o nível de atenção">
+        <rect x="10" y="10" width="440" height="252" rx="16" fill="#FFFFFF" stroke="#DDE7EA"/>
+
+        <text x="34" y="46" font-family="Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0D1B3E">Análise trecho por trecho</text>
+
+        <g fill="#D1D5DB">
+          <rect x="34" y="64" width="392" height="7" rx="3.5"/>
+          <rect x="34" y="80" width="340" height="7" rx="3.5"/>
+        </g>
+
+        <rect x="26" y="100" width="408" height="58" rx="10" fill="#FEF3C7"/>
+        <rect x="26" y="100" width="3.5" height="58" rx="2" fill="#D97706"/>
+        <g fill="#E5B769">
+          <rect x="40" y="114" width="330" height="7" rx="3.5"/>
+          <rect x="40" y="130" width="286" height="7" rx="3.5"/>
+        </g>
+        <text x="382" y="122" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#B45309" text-anchor="end">SINAL DE ATENÇÃO</text>
+        <text x="40" y="152" font-family="Inter, sans-serif" font-size="9.5" fill="#B45309">Baixa originalidade · revisar fonte e citação</text>
+
+        <g fill="#D1D5DB">
+          <rect x="34" y="176" width="392" height="7" rx="3.5"/>
+          <rect x="34" y="192" width="248" height="7" rx="3.5"/>
+        </g>
+
+        <text x="34" y="228" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">Nível de atenção do documento</text>
+        <rect x="34" y="238" width="130" height="9" rx="4.5" fill="#16A34A"/>
+        <rect x="168" y="238" width="130" height="9" rx="4.5" fill="#F59E0B"/>
+        <rect x="302" y="238" width="124" height="9" rx="4.5" fill="#DC2626"/>
+        <path d="M232 228l6 8h-12z" fill="#0D1B3E"/>
+
+        <rect x="10" y="278" width="440" height="72" rx="14" fill="#0D1B3E"/>
+        <text x="34" y="308" font-family="Inter, sans-serif" font-size="12.5" font-weight="600" fill="#FFFFFF">Relatório de apoio à decisão</text>
+        <text x="34" y="330" font-family="Inter, sans-serif" font-size="11.5" fill="#A5EAF2">O professor revisa, dialoga e decide.</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFÍCIOS -->
+<section class="beneficios">
+  <div class="section-title">
+    <h2>Por que professores e instituições usam a Rubric AI</h2>
+    <p>Menos tempo em tarefas repetitivas. Mais tempo para orientar, avaliar e decidir.</p>
+  </div>
+  <div class="beneficios-grid">
+      <div class="beneficio">
+        <div class="beneficio-icone" style="background:#EDE9FE"><svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+        <p class="beneficio-eyebrow" style="color:#7C3AED">Economia de tempo</p>
+        <h3>Correções mais rápidas e organizadas</h3>
+        <p>A IA faz a primeira análise, identifica pontos atendidos e não atendidos e estrutura uma devolutiva inicial para o professor revisar.</p>
+      </div>
+      <div class="beneficio">
+        <div class="beneficio-icone" style="background:#FDF3D8"><svg viewBox="0 0 24 24" fill="none" stroke="#B08D2F" stroke-width="2" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
+        <p class="beneficio-eyebrow" style="color:#8A6D1F">Padronização</p>
+        <h3>Mais consistência entre turmas, professores e critérios</h3>
+        <p>A plataforma avalia com base na rubrica definida e ajuda a manter o mesmo padrão avaliativo ao longo do curso.</p>
+      </div>
+      <div class="beneficio">
+        <div class="beneficio-icone" style="background:#CFFAFE"><svg viewBox="0 0 24 24" fill="none" stroke="#0E7C8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-6.5A8 8 0 1 1 21 12z"/><path d="M8.5 11.5h7M8.5 15h4"/></svg></div>
+        <p class="beneficio-eyebrow" style="color:#0E7C8B">Feedback de qualidade</p>
+        <h3>Devolutivas mais claras para o aluno</h3>
+        <p>Além da nota sugerida, a plataforma gera comentários objetivos sobre pontos fortes, fragilidades e melhorias possíveis.</p>
+      </div>
+      <div class="beneficio">
+        <div class="beneficio-icone" style="background:#DCFCE7"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M12 11V4.5a1.5 1.5 0 0 1 3 0V11"/><path d="M15 11V6.5a1.5 1.5 0 0 1 3 0V13a7 7 0 0 1-7 7h-1a6 6 0 0 1-6-6v-3a1.5 1.5 0 0 1 3 0"/></svg></div>
+        <p class="beneficio-eyebrow" style="color:#16803C">Controle docente</p>
+        <h3>O professor continua sendo o avaliador final</h3>
+        <p>A IA organiza, sugere e acelera. Quem valida a nota e o feedback é sempre o professor.</p>
+      </div>
+  </div>
+</section>
+
+<!-- PRODUTOS -->
+<section class="produtos" id="produtos">
+  <div class="section-title">
+    <h2>Três soluções para apoiar a avaliação acadêmica</h2>
+    <p>Da correção à orientação, da rubrica à integridade textual: a Rubric AI reúne ferramentas para professores, orientadores, coordenadores e instituições de ensino.</p>
+  </div>
+
+  <div class="produtos-grid">
+      <div class="produto-card">
+        <div class="produto-header purple">
+          <img src="logo_purple.png" alt="Logotipo do Rubric AI" class="produto-logo boxed" />
+          <h3>Rubric AI</h3>
+          <p>Correção acadêmica assistida por IA</p>
+        </div>
+        <div class="produto-body">
+          <ul class="produto-features">
+            <li><span class="check-purple">✓</span> Para professores que precisam corrigir TCCs, papers, projetos e atividades avaliativas com mais velocidade e consistência.</li>
+            <li><span class="check-purple">✓</span> Avaliação por rubrica personalizada</li>
+            <li><span class="check-purple">✓</span> Feedback detalhado por critério</li>
+            <li><span class="check-purple">✓</span> Nota sugerida com justificativa</li>
+            <li><span class="check-purple">✓</span> Leitura de PDF e Word</li>
+            <li><span class="check-purple">✓</span> Revisão e aprovação pelo professor</li>
+          </ul>
+          <a href="https://app.rubricai.com.br" class="btn btn-purple">Conhecer o Rubric AI →</a>
+        </div>
+      </div>
+
+      <div class="produto-card">
+        <div class="produto-header navy">
+          <img src="logo_masters_v2.png" alt="Logotipo do Rubric AI Masters" class="produto-logo" />
+          <h3>Rubric AI Masters</h3>
+          <p>Orientação e revisão de monografias com IA</p>
+        </div>
+        <div class="produto-body">
+          <ul class="produto-features">
+            <li><span class="check-gold">✓</span> Para orientadores, programas de pós-graduação e alunos que precisam melhorar a estrutura acadêmica do trabalho ao longo de versões sucessivas.</li>
+            <li><span class="check-gold">✓</span> Comentários nativos no Word</li>
+            <li><span class="check-gold">✓</span> Análise por capítulo</li>
+            <li><span class="check-gold">✓</span> Verificação de aderência ao projeto aprovado</li>
+            <li><span class="check-gold">✓</span> Acompanhamento por versões (V1, V2, V3…)</li>
+            <li><span class="check-gold">✓</span> Apoio ao padrão acadêmico</li>
+          </ul>
+          <a href="https://masters.rubricai.com.br" class="btn btn-gold">Conhecer o Rubric AI Masters →</a>
+        </div>
+      </div>
+
+      <div class="produto-card">
+        <div class="produto-header teal">
+          <img src="rubric_detect_ia_logo.png" alt="Logotipo do Rubric Detect IA" class="produto-logo boxed" />
+          <h3>Rubric Detect IA</h3>
+          <p>Originalidade, similaridade e indícios de uso inadequado de IA</p>
+        </div>
+        <div class="produto-body">
+          <ul class="produto-features">
+            <li><span class="check-teal">✓</span> Para professores e instituições que precisam analisar trabalhos acadêmicos com mais segurança antes da correção final.</li>
+            <li><span class="check-teal">✓</span> Análise de similaridade textual</li>
+            <li><span class="check-teal">✓</span> Trechos potencialmente problemáticos</li>
+            <li><span class="check-teal">✓</span> Indícios de escrita artificial</li>
+            <li><span class="check-teal">✓</span> Relatório de apoio à decisão</li>
+            <li><span class="check-teal">✓</span> Uso complementar à avaliação acadêmica</li>
+          </ul>
+          <a href="https://app.rubricai.com.br/deteccao-ia" class="btn btn-teal">Conhecer o Rubric Detect IA →</a>
+        </div>
+      </div>
+  </div>
+
+  <p class="fluxo-legenda" style="margin-top:44px">Não é uma sentença automática. É uma camada inteligente de apoio à decisão acadêmica.</p>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="como" id="como">
+  <div class="como-inner">
+    <div class="section-title">
+      <h2>Como funciona</h2>
+      <p>Simples para o professor, poderoso nos bastidores.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-icon purple" aria-hidden="true">📤</div>
+        <h4>1. Professor faz upload</h4>
+        <p>Envie o trabalho do aluno em PDF ou Word. A IA lê e interpreta o conteúdo automaticamente.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon gold" aria-hidden="true">🤖</div>
+        <h4>2. IA analisa e comenta</h4>
+        <p>A IA avalia contra os critérios definidos e gera feedback estruturado — pronto para revisão.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon green" aria-hidden="true">✅</div>
+        <h4>3. Professor decide</h4>
+        <p>Revise, edite ou aprove. A nota recalcula na hora conforme suas decisões, antes de devolver ao aluno.</p>
+      </div>
+    </div>
+    <div class="como-print">
+      <img src="tela-rubric-ai.jpg" alt="Tela de correção do Rubric AI mostrando a nota final e os critérios avaliados de um trabalho acadêmico" />
+      <p>Tela real da plataforma: nota final e critérios avaliados um a um.</p>
     </div>
   </div>
 </section>
@@ -981,105 +1514,6 @@
       <img src="tech4.png" alt="Ilustração de professora revisando correção no laptop" class="tech-illus" />
       <h3>O professor decide</h3>
       <p>Cada critério pode ser revisado pelo professor. <strong>Nota e planilha recalculam na hora</strong> — a IA sugere, você comanda.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUTOS -->
-<section class="produtos" id="produtos">
-  <div class="section-title">
-    <h2>Escolha o produto certo para você</h2>
-    <p>Três produtos especializados para cada etapa da jornada acadêmica — da graduação à pós-graduação, da correção à detecção de IA.</p>
-  </div>
-
-  <div class="produtos-stage">
-
-    <img src="foto_produtos.jpg" class="produtos-foto"
-         alt="Consultor da Rubric AI, em um escritório, apresentando os três produtos da plataforma" />
-
-    <div class="produtos-grid">
-
-      <!-- Rubric AI -->
-      <div class="produto-card">
-        <div class="produto-header purple">
-          <img src="logo_purple.png" alt="Logotipo do Rubric AI" class="produto-logo boxed" />
-          <span class="produto-badge badge-purple">Para Graduação</span>
-          <h3>Rubric AI</h3>
-        </div>
-        <div class="produto-body">
-          <ul class="produto-features">
-            <li><span class="check-purple">✓</span> Correção inteligente de TCCs, papers e trabalhos acadêmicos com IA e rubricas institucionais.</li>
-            <li><span class="check-purple">✓</span> Avaliação por rubrica personalizada</li>
-            <li><span class="check-purple">✓</span> Feedback detalhado</li>
-            <li><span class="check-purple">✓</span> Leitura de PDF</li>
-          </ul>
-          <a href="https://app.rubricai.com.br" class="btn btn-purple">Saiba mais →</a>
-        </div>
-      </div>
-
-      <!-- Rubric AI Masters -->
-      <div class="produto-card">
-        <div class="produto-header navy">
-          <img src="logo_masters_v2.png" alt="Logotipo do Rubric AI Masters" class="produto-logo" />
-          <span class="produto-badge badge-gold">Para Pós-Graduação</span>
-          <h3>Rubric AI Masters</h3>
-        </div>
-        <div class="produto-body">
-          <ul class="produto-features">
-            <li><span class="check-gold">✓</span> Plataforma iterativa para orientação de monografias de mestrado.</li>
-            <li><span class="check-gold">✓</span> A IA insere comentários nativos no Word.</li>
-            <li><span class="check-gold">✓</span> Ciclo iterativo V1, V2, V3...</li>
-            <li><span class="check-gold">✓</span> Verifica aderência ao projeto aprovado.</li>
-          </ul>
-          <a href="https://masters.rubricai.com.br" class="btn btn-gold">Saiba mais →</a>
-        </div>
-      </div>
-
-      <!-- Rubric Detect IA -->
-      <div class="produto-card">
-        <div class="produto-header teal">
-          <img src="rubric_detect_ia_logo.png" alt="Logotipo do Rubric Detect IA" class="produto-logo boxed" />
-          <span class="produto-badge badge-teal">Detecção Inteligente</span>
-          <h3>Rubric Detect IA</h3>
-        </div>
-        <div class="produto-body">
-          <ul class="produto-features">
-            <li><span class="check-teal">✓</span> Ferramenta avançada de detecção de IA em trabalhos acadêmicos.</li>
-            <li><span class="check-teal">✓</span> A IA analisa o conteúdo.</li>
-            <li><span class="check-teal">✓</span> Identifica padrões de geração automática.</li>
-            <li><span class="check-teal">✓</span> O professor decide.</li>
-          </ul>
-          <a href="https://app.rubricai.com.br/deteccao-ia" class="btn btn-teal">Saiba mais →</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- COMO FUNCIONA -->
-<section class="como" id="como">
-  <div class="como-inner">
-    <div class="section-title">
-      <h2>Como funciona</h2>
-      <p>Simples para o professor, poderoso nos bastidores.</p>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-icon purple" aria-hidden="true">📤</div>
-        <h4>1. Professor faz upload</h4>
-        <p>Envie o trabalho do aluno em PDF ou Word. A IA lê e interpreta o conteúdo automaticamente.</p>
-      </div>
-      <div class="step">
-        <div class="step-icon gold" aria-hidden="true">🤖</div>
-        <h4>2. IA analisa e comenta</h4>
-        <p>A IA avalia contra os critérios definidos e gera feedback estruturado — pronto para revisão.</p>
-      </div>
-      <div class="step">
-        <div class="step-icon green" aria-hidden="true">✅</div>
-        <h4>3. Professor decide</h4>
-        <p>Revise, edite ou aprove. A nota recalcula na hora conforme suas decisões, antes de devolver ao aluno.</p>
-      </div>
     </div>
   </div>
 </section>
