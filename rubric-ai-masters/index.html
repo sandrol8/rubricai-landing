@@ -131,8 +131,44 @@
       box-shadow: 0 26px 60px rgba(0,0,0,0.34);
     }
 
-    .hero-figura img { width: 100%; display: block; border-radius: 9px; }
-    .hero-figura a { display: block; cursor: zoom-in; }
+    .hero-figura img {
+      width: 100%;
+      display: block;
+      border-radius: 9px;
+      transition: filter 0.2s ease;
+    }
+
+    .hero-figura .zoom {
+      position: relative;
+      display: block;
+      cursor: zoom-in;
+      border-radius: 9px;
+      overflow: hidden;
+    }
+
+    /* Selo sobre a imagem: é onde o olho já está */
+    .hero-figura .zoom-selo {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(7,25,56,0.9);
+      color: var(--white);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 100px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+      transition: background 0.2s ease;
+    }
+
+    .hero-figura .zoom-selo svg { width: 15px; height: 15px; }
+
+    .hero-figura .zoom:hover img { filter: brightness(0.92); }
+    .hero-figura .zoom:hover .zoom-selo { background: var(--gold); color: var(--navy); }
+
     .hero-figura figcaption a { color: var(--gold-dark); text-decoration: underline; cursor: pointer; }
 
     .hero-figura figcaption {
@@ -492,10 +528,14 @@
     <div>
       <div class="hero-kicker">Comentários nativos, dentro do arquivo do aluno</div>
       <figure class="hero-figura">
-        <a href="../masters-comentarios.jpg" target="_blank" rel="noopener" aria-label="Abrir a imagem em tamanho real">
+        <a href="../masters-comentarios.jpg" target="_blank" rel="noopener" class="zoom" aria-label="Abrir a imagem em tamanho real">
           <img src="../masters-comentarios.jpg" alt="Documento do Word aberto com comentários da IA na margem direita, assinados pelo professor, apontando ajustes no problema de pesquisa, nos objetivos e na justificativa" />
+          <span class="zoom-selo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>
+            Ver em tamanho real
+          </span>
         </a>
-        <figcaption>Arquivo real devolvido pela plataforma: comentários na margem, um por critério, com a justificativa do apontamento. <a href="../masters-comentarios.jpg" target="_blank" rel="noopener">Clique para ampliar.</a></figcaption>
+        <figcaption>Arquivo real devolvido pela plataforma: comentários na margem, um por critério, com a justificativa do apontamento. <a href="../masters-comentarios.jpg" target="_blank" rel="noopener">Clique na imagem para ampliar e ler cada comentário.</a></figcaption>
       </figure>
     </div>
   </div>
