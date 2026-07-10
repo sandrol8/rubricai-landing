@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rubric Detect IA — Originalidade e indícios de uso de IA em trabalhos acadêmicos</title>
+  <meta name="description" content="Analise trabalhos acadêmicos trecho por trecho: similaridade textual, baixa originalidade e indícios de escrita artificial. Relatório de apoio à decisão docente, nunca uma sentença automática." />
+  <link rel="canonical" href="https://rubricai.com.br/rubric-detect-ia/" />
+  <meta property="og:title" content="Rubric Detect IA — Originalidade e indícios de uso de IA" />
+  <meta property="og:description" content="Verifique a originalidade antes de dar a nota, sem sair da correção. A IA analisa. O professor decide." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rubricai.com.br/rubric-detect-ia/" />
+  <meta property="og:image" content="https://rubricai.com.br/rubric_detect_ia_logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0D1B3E;
+      --teal: #14B8CC;
+      --teal-dark: #0E94A5;
+      --teal-deep: #0B6E7C;
+      --teal-light: #A5EAF2;
+      --teal-wash: #ECF8FB;
+      --amber: #F59E0B;
+      --amber-wash: #FEF3C7;
+      --amber-dark: #B45309;
+      --green: #16A34A;
+      --red: #DC2626;
+      --white: #FFFFFF;
+      --off-white: #F8FAFB;
+      --gray: #6B7280;
+      --border: #E5E7EB;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; }
+    a { color: inherit; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      height: 84px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-brand img { height: 62px; display: block; }
+    .nav-acoes { display: flex; align-items: center; gap: 10px; }
+
+    .nav-voltar {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gray);
+      text-decoration: none;
+      margin-right: 6px;
+    }
+    .nav-voltar:hover { color: var(--navy); }
+
+    .nav-btn {
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .nav-btn:hover { opacity: 0.88; }
+    .nav-btn.ghost { border: 1.5px solid var(--border); color: var(--navy); }
+    .nav-btn.teal { background: var(--teal-dark); color: var(--white); }
+
+    /* ===== Botões ===== */
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.16s ease, opacity 0.16s ease;
+    }
+    .btn:hover { transform: translateY(-2px); opacity: 0.93; }
+    .btn.teal { background: var(--teal-dark); color: var(--white); }
+    .btn.vazado { border: 1.5px solid #B6D9E1; color: var(--navy); }
+    .btn.vazado:hover { border-color: var(--teal-dark); color: var(--teal-dark); }
+    .btn.vazado-claro { border: 1.5px solid rgba(255,255,255,0.34); color: var(--white); }
+
+    /* ===== HERO (claro, para o logo de fundo branco sumir) ===== */
+    .hero {
+      background: linear-gradient(120deg, #FFFFFF 0%, #FFFFFF 26%, #EDF8FB 62%, #D9F0F6 100%);
+      padding: 68px 24px 78px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 52px;
+      align-items: center;
+    }
+
+    .hero-logo { height: 104px; width: auto; display: block; margin-bottom: 22px; }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1.16;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em { font-style: normal; color: var(--teal-dark); }
+
+    .hero p { font-size: 1rem; line-height: 1.68; color: #4B5563; }
+
+    .hero-nota {
+      margin-top: 20px;
+      padding-left: 14px;
+      border-left: 2px solid var(--teal);
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+
+    .hero-figura {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 10px;
+      box-shadow: 0 26px 60px rgba(13,27,62,0.16);
+      border: 1px solid var(--border);
+    }
+
+    .hero-figura .zoom {
+      position: relative;
+      display: block;
+      cursor: zoom-in;
+      border-radius: 9px;
+      overflow: hidden;
+    }
+
+    .hero-figura img { width: 100%; display: block; border-radius: 9px; transition: filter 0.2s ease; }
+
+    .hero-figura .zoom-selo {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(13,27,62,0.9);
+      color: var(--white);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 100px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+      transition: background 0.2s ease;
+    }
+
+    .hero-figura .zoom-selo svg { width: 15px; height: 15px; }
+    .hero-figura .zoom:hover img { filter: brightness(0.94); }
+    .hero-figura .zoom:hover .zoom-selo { background: var(--teal); color: #06232B; }
+
+    .hero-figura figcaption {
+      font-size: 0.78rem;
+      color: var(--gray);
+      text-align: center;
+      padding: 12px 8px 4px;
+      line-height: 1.5;
+    }
+
+    .hero-figura figcaption a { color: var(--teal-dark); text-decoration: underline; }
+
+    /* ===== Blocos ===== */
+    section { padding: 82px 24px; }
+
+    .titulo { max-width: 800px; margin: 0 auto 52px; text-align: center; }
+
+    .titulo h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .titulo p { font-size: 1rem; color: var(--gray); line-height: 1.66; }
+
+    /* ===== Público ===== */
+    .publico-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .publico-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 30px 26px;
+      background: var(--white);
+    }
+
+    .publico-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--teal-dark);
+      margin-bottom: 10px;
+    }
+
+    .publico-card h3 { font-size: 1.02rem; font-weight: 700; margin-bottom: 10px; }
+    .publico-card p { font-size: 0.9rem; color: #4B5563; line-height: 1.62; }
+
+    /* ===== Passos ===== */
+    .passos { background: var(--teal-wash); }
+
+    .passos-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .passo {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: 14px;
+      padding: 28px 24px;
+    }
+
+    .passo-num {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--teal-light);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+    }
+
+    .passo h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .passo p { font-size: 0.88rem; color: #4B5563; line-height: 1.6; }
+
+    /* ===== Relatório ===== */
+    .relatorio-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 40px;
+    }
+
+    .relatorio-grid li {
+      list-style: none;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.94rem;
+      color: #374151;
+    }
+
+    .relatorio-grid li span { color: var(--teal-dark); font-weight: 700; }
+
+    /* ===== Limites e ética (bloco navy, o mais importante da página) ===== */
+    .limites {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .limites .titulo h2 { color: var(--white); }
+    .limites .titulo p { color: rgba(255,255,255,0.7); }
+
+    .limites-grid {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .limite {
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(165,234,242,0.18);
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+
+    .limite h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--teal-light);
+      margin-bottom: 10px;
+    }
+
+    .limite p { font-size: 0.9rem; color: rgba(255,255,255,0.74); line-height: 1.64; }
+
+    .limites-frase {
+      max-width: 760px;
+      margin: 44px auto 0;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--teal-light);
+      line-height: 1.5;
+    }
+
+    /* ===== Planos ===== */
+    .planos { background: var(--off-white); }
+
+    .planos-grid {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .plano {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px 22px 26px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .plano.destaque {
+      border: 2px solid var(--teal);
+      box-shadow: 0 18px 40px rgba(20,184,204,0.18);
+    }
+
+    .plano-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--teal);
+      color: #06232B;
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .plano-nome { font-size: 1.05rem; font-weight: 700; }
+    .plano-qtd { font-size: 0.84rem; color: var(--gray); margin-bottom: 18px; }
+
+    .plano-preco {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.15rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .plano-preco .rs {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.46em;
+      font-weight: 600;
+      vertical-align: 0.42em;
+      margin-right: 3px;
+    }
+
+    .plano-preco small {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--gray);
+    }
+
+    .plano-preco.consulta { font-size: 1.5rem; }
+
+    .plano-sub { font-size: 0.82rem; color: var(--gray); margin: 8px 0 22px; }
+    .plano .btn { margin-top: auto; padding: 12px 18px; font-size: 0.86rem; }
+
+    .planos-nota {
+      max-width: 780px;
+      margin: 34px auto 0;
+      text-align: center;
+      font-size: 0.84rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ===== CTA final ===== */
+    .cta-final {
+      background: linear-gradient(140deg, #0B6E7C 0%, #0E94A5 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta-final h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-final p { color: rgba(255,255,255,0.82); max-width: 34em; margin: 0 auto 32px; }
+    .cta-final .hero-ctas { justify-content: center; }
+    .cta-final .btn.teal { background: var(--white); color: var(--teal-deep); }
+
+    /* ===== Rodapé ===== */
+    footer {
+      background: #060D22;
+      color: rgba(255,255,255,0.6);
+      padding: 44px 24px;
+      text-align: center;
+      font-size: 0.84rem;
+    }
+
+    footer a { color: rgba(255,255,255,0.72); text-decoration: none; }
+    footer a:hover { color: var(--teal-light); }
+    footer .links { margin-bottom: 14px; display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; }
+
+    /* ===== Responsivo ===== */
+    @media (max-width: 1024px) {
+      .planos-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 940px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-logo { margin-left: auto; margin-right: auto; }
+    }
+
+    @media (max-width: 900px) {
+      .publico-grid, .passos-grid, .limites-grid { grid-template-columns: 1fr; }
+      .relatorio-grid { grid-template-columns: 1fr; }
+      .nav-voltar { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      section { padding: 60px 20px; }
+      .planos-grid { grid-template-columns: 1fr; max-width: 420px; }
+      .nav-inner { height: 72px; }
+      .nav-brand img { height: 52px; }
+      .hero-logo { height: 88px; }
+      .nav-btn.ghost { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand"><img src="../logo_purple.png" alt="Rubric AI — página inicial" /></a>
+    <div class="nav-acoes">
+      <a href="../#produtos" class="nav-voltar">← Todos os produtos</a>
+      <a href="https://app.rubricai.com.br" class="nav-btn ghost">Entrar</a>
+      <a href="https://app.rubricai.com.br/deteccao-ia" class="nav-btn teal">Analisar um trabalho</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <img src="../rubric_detect_ia_logo.png" alt="Logotipo do Rubric Detect IA" class="hero-logo" />
+      <h1>Verifique a originalidade <em>antes</em> de dar a nota</h1>
+      <p>O Rubric Detect IA lê o trabalho trecho por trecho e aponta similaridade textual, baixa originalidade e indícios de escrita artificial. O resultado chega como relatório de apoio à decisão — dentro do mesmo fluxo em que você já corrige, e não como uma ferramenta separada, usada depois.</p>
+      <p class="hero-nota">Indicador probabilístico, nunca prova. Serve para orientar investigação, diálogo e revisão — nunca para punição automática. Quem decide é o professor.</p>
+      <div class="hero-ctas">
+        <a href="https://app.rubricai.com.br/deteccao-ia" class="btn teal">Analisar um trabalho →</a>
+        <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20o%20Rubric%20Detect%20IA%20para%20a%20minha%20institui%C3%A7%C3%A3o." class="btn vazado" target="_blank" rel="noopener">Falar com especialista</a>
+      </div>
+    </div>
+
+    <div>
+      <figure class="hero-figura">
+        <a href="../detect-resultado.jpg" target="_blank" rel="noopener" class="zoom" aria-label="Abrir a imagem em tamanho real">
+          <img src="../detect-resultado.jpg" alt="Tela de resultado do Rubric Detect IA: veredito, barra de três zonas entre IA e humano, contagem de trechos analisados e lista dos trechos que mais parecem gerados por IA" />
+          <span class="zoom-selo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>
+            Ver em tamanho real
+          </span>
+        </a>
+        <figcaption>Relatório real da plataforma, com o aviso de que o indicador é probabilístico e não constitui prova. <a href="../detect-resultado.jpg" target="_blank" rel="noopener">Clique para ampliar.</a></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM É -->
+<section>
+  <div class="titulo">
+    <h2>Para quem é</h2>
+    <p>Feito para quem precisa avaliar com segurança, sem transformar suspeita em acusação.</p>
+  </div>
+  <div class="publico-grid">
+    <div class="publico-card">
+      <div class="publico-num">01</div>
+      <h3>Professores</h3>
+      <p>Que recebem trabalhos e precisam saber onde olhar com mais atenção antes de fechar a nota, com o apontamento justificado trecho a trecho.</p>
+    </div>
+    <div class="publico-card">
+      <div class="publico-num">02</div>
+      <h3>Coordenações de curso</h3>
+      <p>Que precisam de um critério comum entre professores diferentes, para que a conversa sobre integridade não dependa da percepção de cada um.</p>
+    </div>
+    <div class="publico-card">
+      <div class="publico-num">03</div>
+      <h3>Instituições de ensino</h3>
+      <p>Que querem apoiar políticas de integridade acadêmica com registro, transparência e um processo previsível de análise e revisão.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="passos">
+  <div class="titulo">
+    <h2>Três passos, dentro da correção</h2>
+    <p>Não é uma ferramenta à parte, usada depois. É uma camada de apoio antes da nota.</p>
+  </div>
+  <div class="passos-grid">
+    <div class="passo">
+      <div class="passo-num">PASSO 1</div>
+      <h3>Envio</h3>
+      <p>Você envia o trabalho em PDF ou Word. Trabalhos maiores, como monografias e teses, são aceitos normalmente.</p>
+    </div>
+    <div class="passo">
+      <div class="passo-num">PASSO 2</div>
+      <h3>Análise</h3>
+      <p>O texto é lido trecho por trecho. Cada passagem recebe um indicador próprio, em vez de um número único para o documento inteiro.</p>
+    </div>
+    <div class="passo">
+      <div class="passo-num">PASSO 3</div>
+      <h3>Relatório</h3>
+      <p>Você recebe o nível de atenção do documento, a lista de trechos marcados e o motivo de cada marcação. E decide o que fazer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE O RELATÓRIO TRAZ -->
+<section>
+  <div class="titulo">
+    <h2>O que o relatório traz</h2>
+    <p>Informação suficiente para conversar com o aluno — não um veredito para arquivar.</p>
+  </div>
+  <ul class="relatorio-grid">
+    <li><span>✓</span> Nível de atenção do documento, em três zonas</li>
+    <li><span>✓</span> Lista de trechos potencialmente problemáticos</li>
+    <li><span>✓</span> Análise de similaridade textual</li>
+    <li><span>✓</span> Indícios de padrões de escrita artificial</li>
+    <li><span>✓</span> Motivo de cada trecho marcado</li>
+    <li><span>✓</span> Aceita TCC, artigo, monografia e tese</li>
+    <li><span>✓</span> Compra avulsa, sem assinatura</li>
+    <li><span>✓</span> Uso complementar à avaliação acadêmica</li>
+  </ul>
+</section>
+
+<!-- LIMITES E ÉTICA -->
+<section class="limites">
+  <div class="titulo">
+    <h2>O que esta ferramenta não é</h2>
+    <p>Esta seção existe porque um indicador mal interpretado pode prejudicar um aluno inocente.</p>
+  </div>
+  <div class="limites-grid">
+    <div class="limite">
+      <h3>Não é prova</h3>
+      <p>O resultado é probabilístico. Ele indica que um trecho merece atenção, não que houve fraude. Nenhum número, sozinho, sustenta uma acusação.</p>
+    </div>
+    <div class="limite">
+      <h3>Não pune</h3>
+      <p>A plataforma não reprova, não bloqueia e não aciona sanção alguma. Ela informa. Qualquer consequência acadêmica nasce de uma decisão humana.</p>
+    </div>
+    <div class="limite">
+      <h3>Não substitui o professor</h3>
+      <p>Quem conhece o aluno, o contexto e o histórico do trabalho é o professor. O relatório serve para orientar a leitura dele, e para abrir conversa.</p>
+    </div>
+  </div>
+  <p class="limites-frase">"Não é uma sentença automática. É uma camada inteligente de apoio à decisão acadêmica."</p>
+</section>
+
+<!-- PLANOS -->
+<section class="planos" id="planos">
+  <div class="titulo">
+    <h2>Planos e preços</h2>
+    <p>Compra avulsa ou pacotes. Sem assinatura mensal, sem fidelidade.</p>
+  </div>
+  <div class="planos-grid">
+    <div class="plano">
+      <div class="plano-nome">Avulsa</div>
+      <div class="plano-qtd">1 detecção</div>
+      <div class="plano-preco"><span class="rs">R$</span>4<small>,90</small></div>
+      <div class="plano-sub">Para testar</div>
+      <a href="https://app.rubricai.com.br/deteccao-ia" class="btn vazado">Comprar</a>
+    </div>
+    <div class="plano">
+      <div class="plano-nome">Pacote 10</div>
+      <div class="plano-qtd">10 detecções</div>
+      <div class="plano-preco"><span class="rs">R$</span>39<small>,90</small></div>
+      <div class="plano-sub">R$ 3,99 por detecção</div>
+      <a href="https://app.rubricai.com.br/deteccao-ia" class="btn vazado">Comprar pacote</a>
+    </div>
+    <div class="plano destaque">
+      <div class="plano-badge">Mais popular</div>
+      <div class="plano-nome">Pacote 30</div>
+      <div class="plano-qtd">30 detecções</div>
+      <div class="plano-preco"><span class="rs">R$</span>99<small>,90</small></div>
+      <div class="plano-sub">R$ 3,33 por detecção</div>
+      <a href="https://app.rubricai.com.br/deteccao-ia" class="btn teal">Comprar pacote</a>
+    </div>
+    <div class="plano">
+      <div class="plano-nome">Institucional</div>
+      <div class="plano-qtd">Volume alto</div>
+      <div class="plano-preco consulta">Sob consulta</div>
+      <div class="plano-sub">Para instituições e equipes</div>
+      <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20falar%20com%20vendas%20sobre%20o%20plano%20institucional%20do%20Rubric%20Detect%20IA." class="btn vazado" target="_blank" rel="noopener">Falar com vendas</a>
+    </div>
+  </div>
+  <p class="planos-nota">Detecções não expiram. Trabalhos maiores, como monografia ou tese, consomem mais de uma detecção, proporcional ao tamanho do documento.</p>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <h2>Analise um trabalho por R$ 4,90</h2>
+  <p>Sem assinatura e sem compromisso. Envie um documento, veja o relatório e decida se o padrão de análise serve para o seu curso.</p>
+  <div class="hero-ctas">
+    <a href="https://app.rubricai.com.br/deteccao-ia" class="btn teal">Analisar um trabalho →</a>
+    <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20do%20Rubric%20Detect%20IA." class="btn vazado-claro" target="_blank" rel="noopener">Agendar demonstração</a>
+  </div>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="../">Início</a>
+    <a href="../#produtos">Produtos</a>
+    <a href="../#planos">Planos</a>
+    <a href="../#seguranca">Segurança</a>
+    <a href="../#contato">Contato</a>
+    <a href="../privacidade.html">Política de Privacidade</a>
+  </div>
+  <p>© 2026 Rubric AI · Prompty Soluções · João Pessoa/PB · CNPJ 46.595.694/0001-58</p>
+</footer>
+
+</body>
+</html>
