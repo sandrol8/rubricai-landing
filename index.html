@@ -798,6 +798,76 @@
       .planos-grid.tres { grid-template-columns: 1fr; max-width: 420px; }
     }
 
+    /* COMPARATIVO */
+    .comparativo { padding: 80px 24px; background: var(--white); }
+
+    .comp-scroll {
+      max-width: 1100px;
+      margin: 0 auto;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .comp-tabela {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .comp-tabela th, .comp-tabela td {
+      padding: 16px 18px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    .comp-tabela tr:last-child td { border-bottom: none; }
+
+    .comp-tabela thead th {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .comp-tabela thead th.vazio { background: var(--off-white); }
+    .comp-tabela thead th.c-purple { background: var(--purple); }
+    .comp-tabela thead th.c-navy { background: var(--navy); color: var(--gold-light); }
+    .comp-tabela thead th.c-teal { background: var(--teal); }
+
+    .comp-tabela tbody th {
+      width: 18%;
+      background: var(--off-white);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gray);
+    }
+
+    .comp-tabela td { color: #374151; width: 27%; }
+
+    .comp-tabela .comp-link {
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .comp-link.purple { color: var(--purple); }
+    .comp-link.gold { color: #9A7A2C; }
+    .comp-link.teal { color: var(--teal-dark); }
+    .comp-link:hover { text-decoration: underline; }
+
+    .comp-dica {
+      max-width: 1100px;
+      margin: 20px auto 0;
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--gray);
+    }
+
     .hidden { display: none !important; }
 
     /* CONTATO */
@@ -1521,6 +1591,71 @@
   </div>
 
   <p class="fluxo-legenda" style="margin-top:44px">Não é uma sentença automática. É uma camada inteligente de apoio à decisão acadêmica.</p>
+</section>
+
+<!-- COMPARATIVO -->
+<section class="comparativo" id="comparativo">
+  <div class="section-title">
+    <h2>Qual é o produto certo para você?</h2>
+    <p>Os três produtos se complementam. Veja lado a lado o que cada um faz e como é cobrado.</p>
+  </div>
+  <div class="comp-scroll">
+    <table class="comp-tabela">
+      <thead>
+        <tr>
+          <th class="vazio" scope="col"></th>
+          <th class="c-purple" scope="col">Rubric AI</th>
+          <th class="c-navy" scope="col">Rubric AI Masters</th>
+          <th class="c-teal" scope="col">Rubric Detect IA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Para quem</th>
+          <td>Professores que corrigem trabalhos com rubrica, na graduação e na pós</td>
+          <td>Professores de mestrado: orientadores e membros de banca</td>
+          <td>Professores e instituições que precisam checar a originalidade</td>
+        </tr>
+        <tr>
+          <th scope="row">Tipo de trabalho</th>
+          <td>TCCs, papers, projetos e atividades avaliativas</td>
+          <td>Monografias e dissertações, em construção ou concluídas</td>
+          <td>Qualquer trabalho acadêmico, de uma atividade a uma tese</td>
+        </tr>
+        <tr>
+          <th scope="row">O que você recebe</th>
+          <td>Nota sugerida e feedback por critério da sua rubrica</td>
+          <td>Comentários no próprio Word do aluno e, na banca, uma proposta de parecer</td>
+          <td>Relatório de similaridade, trechos de atenção e indícios de escrita artificial</td>
+        </tr>
+        <tr>
+          <th scope="row">Quem decide</th>
+          <td>O professor revisa cada critério antes de fechar a nota</td>
+          <td>O professor aceita, edita ou exclui cada comentário</td>
+          <td>O professor interpreta o relatório, que nunca é prova</td>
+        </tr>
+        <tr>
+          <th scope="row">Como é cobrado</th>
+          <td>Assinatura mensal</td>
+          <td>Pacotes de créditos, pagamento único</td>
+          <td>Pacotes de detecções, pagamento único</td>
+        </tr>
+        <tr>
+          <th scope="row">Para começar</th>
+          <td>3 correções grátis por mês</td>
+          <td>3 monografias e 1 banca de cortesia</td>
+          <td>Detecção avulsa por R$ 4,90</td>
+        </tr>
+        <tr>
+          <th scope="row"></th>
+          <td><a href="/rubric-ai/" class="comp-link purple">Conhecer o Rubric AI →</a></td>
+          <td><a href="/rubric-ai-masters/" class="comp-link gold">Conhecer o Masters →</a></td>
+          <td><a href="/rubric-detect-ia/" class="comp-link teal">Conhecer o Detect IA →</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="comp-dica">Na dúvida, fale com a gente pelo WhatsApp e indicamos o produto certo para o seu caso.</p>
 </section>
 
 <!-- COMO FUNCIONA -->
