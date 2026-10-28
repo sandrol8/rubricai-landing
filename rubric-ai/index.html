@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rubric AI — Correção acadêmica assistida por IA, com a decisão final do professor</title>
+  <title>Rubric AI, Correção acadêmica assistida por IA, com a decisão final do professor</title>
   <meta name="description" content="A Rubric AI analisa TCCs, papers e projetos com base na sua rubrica, sugere uma nota preliminar e justifica critério por critério. O professor revisa, ajusta e decide." />
   <link rel="canonical" href="https://rubricai.com.br/rubric-ai/" />
-  <meta property="og:title" content="Rubric AI — Correção acadêmica assistida por IA" />
+  <meta property="og:title" content="Rubric AI, Correção acadêmica assistida por IA" />
   <meta property="og:description" content="Analise por rubrica, nota preliminar sugerida e justificativa por critério. A IA analisa. O professor decide." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://rubricai.com.br/rubric-ai/" />
@@ -43,6 +43,21 @@
 
     img { max-width: 100%; }
     a { color: inherit; }
+
+
+    /* ===== FAIXA DE PRECO NO TOPO ===== */
+    .hero-preco {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 2px;
+      margin: 0 0 18px;
+      padding: 12px 18px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.75);
+    }
+    .hero-preco strong { font-size: 1.1rem; color: var(--navy); font-weight: 800; }
+    .hero-preco span { font-size: 0.9rem; color: var(--gray); }
 
     /* ===== NAV ===== */
     nav {
@@ -563,7 +578,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="../" class="nav-brand"><img src="../logo_purple.png" alt="Rubric AI — página inicial" /></a>
+    <a href="../" class="nav-brand"><img src="../logo_purple.png" alt="Rubric AI, página inicial" /></a>
     <div class="nav-acoes">
       <a href="../#produtos" class="nav-voltar">← Todos os produtos</a>
       <a href="https://app.rubricai.com.br/login" class="nav-btn ghost">Entrar</a>
@@ -579,10 +594,11 @@
       <img src="../logo_purple.png" alt="Logotipo da Rubric AI" class="hero-logo" />
       <h1>A correção acadêmica para quem <em>valoriza critério</em> e decide a nota</h1>
       <p>A Rubric AI lê o trabalho do aluno com base na rubrica que você já usa, marca cada critério como atendido ou não atendido, sugere uma nota preliminar e escreve a justificativa de cada marcação. Você revisa, ajusta o que discordar e fecha a nota. Serve para TCCs, papers, monografias e projetos.</p>
-      <p class="hero-nota">A IA analisa. O professor decide. Nenhuma nota é fechada automaticamente — o professor sempre revisa e aprova antes de finalizar o resultado.</p>
+      <p class="hero-nota">A IA analisa. O professor decide. Nenhuma nota é fechada automaticamente, o professor sempre revisa e aprova antes de finalizar o resultado.</p>
+      <p class="hero-preco"><strong>A partir de R$ 39,90 por mês</strong><span>Plano gratuito com 3 correções por mês, sem cartão de crédito.</span></p>
       <div class="hero-ctas">
-        <a href="https://app.rubricai.com.br/cadastro" class="btn roxo">Começar grátis — 3 correções/mês →</a>
-        <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20a%20Rubric%20AI%20para%20a%20minha%20institui%C3%A7%C3%A3o." class="btn vazado" target="_blank" rel="noopener">Falar com especialista</a>
+        <a href="https://app.rubricai.com.br/cadastro" class="btn roxo">Testar grátis, 3 correções por mês →</a>
+        <a href="https://wa.me/5511968383768?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20a%20Rubric%20AI%20para%20a%20minha%20institui%C3%A7%C3%A3o." class="btn vazado" target="_blank" rel="noopener">Falar com especialista</a>
       </div>
     </div>
 
@@ -601,13 +617,23 @@
   </div>
 </section>
 
+<!-- CONVITE -->
+<section class="cta-final">
+  <h2>Corrija três trabalhos sem pagar nada</h2>
+  <p>Envie um TCC que você já corrigiu e compare. Se a análise não fizer sentido para o seu curso, você não perdeu nada além de dois minutos.</p>
+  <div class="hero-ctas">
+    <a href="https://app.rubricai.com.br/cadastro" class="btn roxo">Começar grátis →</a>
+    <a href="https://wa.me/5511968383768?text=Ol%C3%A1%21%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20da%20Rubric%20AI." class="btn vazado-claro" target="_blank" rel="noopener">Agendar demonstração</a>
+  </div>
+</section>
+
 <!-- O QUE É -->
 <section class="sobre">
   <div class="titulo">
     <h2>O que é a Rubric AI</h2>
   </div>
   <div class="sobre-texto">
-    <p>Corrigir um TCC bem feito leva tempo. Ler o texto inteiro, conferir cada exigência da rubrica, escrever um retorno que ajude o aluno a melhorar e ainda manter o mesmo padrão entre o primeiro e o trigésimo trabalho da pilha — tudo isso no intervalo entre duas aulas.</p>
+    <p>Corrigir um TCC bem feito leva tempo. Ler o texto inteiro, conferir cada exigência da rubrica, escrever um retorno que ajude o aluno a melhorar e ainda manter o mesmo padrão entre o primeiro e o trigésimo trabalho da pilha, tudo isso no intervalo entre duas aulas.</p>
     <p>A Rubric AI faz a primeira passagem. Ela lê o documento, confronta o texto com cada critério da rubrica, aponta o que foi cumprido e o que ficou faltando, e explica o porquê de cada apontamento. O que chega até você não é um número solto: é uma análise que você pode conferir, contestar e corrigir, item por item.</p>
     <p>Nada é publicado sem a sua revisão. A nota que vai para o aluno é a nota que você aprovou.</p>
     <p class="sobre-frase">A tarefa que a IA assume é a leitura repetitiva. A que continua sua é o julgamento.</p>
@@ -727,7 +753,7 @@
     </div>
     <div class="limite">
       <h3>Não é infalível</h3>
-      <p>A IA erra, e por isso mostra a justificativa de cada marcação — para que o erro seja visível e corrigível, e não engolido junto com a nota.</p>
+      <p>A IA erra, e por isso mostra a justificativa de cada marcação, para que o erro seja visível e corrigível, e não engolido junto com a nota.</p>
     </div>
   </div>
   <p class="limites-frase">Uma correção defensável é aquela em que alguém pode perguntar por quê, e existe resposta.</p>
@@ -740,7 +766,7 @@
       <h2>Para coordenações e instituições</h2>
       <p>Quando vários professores corrigem a mesma disciplina, a diferença entre eles vira reclamação de aluno e retrabalho de coordenação. A Rubric AI aplica a mesma rubrica para todos e deixa registrado o motivo de cada marcação.</p>
       <div class="hero-ctas">
-        <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20plano%20institucional%20da%20Rubric%20AI." class="btn roxo" target="_blank" rel="noopener">Solicitar demonstração institucional →</a>
+        <a href="https://wa.me/5511968383768?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20plano%20institucional%20da%20Rubric%20AI." class="btn roxo" target="_blank" rel="noopener">Solicitar demonstração institucional →</a>
       </div>
     </div>
     <div>
@@ -793,16 +819,15 @@
       <a href="https://app.rubricai.com.br/cadastro" class="btn vazado">Assinar</a>
     </div>
   </div>
-  <p class="planos-nota">Volumes acima do plano Premium são atendidos sob consulta. <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20falar%20com%20vendas%20sobre%20a%20Rubric%20AI%20para%20a%20minha%20equipe." target="_blank" rel="noopener">Fale com vendas</a> para condições por equipe ou instituição.</p>
+  <p class="planos-nota">Volumes acima do plano Premium são atendidos sob consulta. <a href="https://wa.me/5511968383768?text=Ol%C3%A1%21%20Quero%20falar%20com%20vendas%20sobre%20a%20Rubric%20AI%20para%20a%20minha%20equipe." target="_blank" rel="noopener">Fale com vendas</a> para condições por equipe ou instituição.</p>
 </section>
 
 <!-- CTA FINAL -->
 <section class="cta-final">
-  <h2>Corrija três trabalhos sem pagar nada</h2>
-  <p>Envie um TCC que você já corrigiu e compare. Se a análise não fizer sentido para o seu curso, você não perdeu nada além de dois minutos.</p>
+  <h2>Comece pelo trabalho que você já corrigiu</h2>
+  <p>Três correções por mês sem pagar nada, sem cartão de crédito.</p>
   <div class="hero-ctas">
     <a href="https://app.rubricai.com.br/cadastro" class="btn roxo">Começar grátis →</a>
-    <a href="https://wa.me/5511944773623?text=Ol%C3%A1%21%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20da%20Rubric%20AI." class="btn vazado-claro" target="_blank" rel="noopener">Agendar demonstração</a>
   </div>
 </section>
 
