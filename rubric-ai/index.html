@@ -62,6 +62,140 @@
 
 
 
+
+    /* ===== ONDE É USADA + LIMITES, LADO A LADO ===== */
+    .usos {
+      position: relative;
+      overflow: hidden;
+      padding: 96px 24px;
+      background: linear-gradient(170deg, #FDF8EE 0%, #FFFCF6 50%, #F7F2FF 100%);
+    }
+
+    .usos-deco { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .usos-deco > * { position: absolute; display: block; }
+    .ud-1 { top: -150px; left: -180px; width: 520px; }
+    .ud-2 { bottom: -190px; right: -160px; width: 500px; }
+    .ud-3 { top: 130px; right: 46px; width: 128px; }
+    .ud-4 { bottom: 150px; left: 30px; width: 100px; }
+
+    .usos-grid {
+      position: relative;
+      z-index: 2;
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 0.86fr 1.24fr;
+      gap: 42px;
+      align-items: start;
+    }
+
+    .usos-col .titulo { margin-bottom: 28px; }
+
+    .usos-lista {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .usos-lista li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: 0 8px 22px rgba(13,27,62,0.08);
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 0.98rem;
+      line-height: 1.35;
+    }
+    .usos-lista img { width: 52px; height: 52px; border-radius: 13px; flex-shrink: 0; display: block; }
+
+    /* bloco escuro dos limites */
+    .limites-bloco {
+      background: linear-gradient(160deg, #0C1A3C 0%, #142449 55%, #0B1733 100%);
+      border-radius: 26px;
+      padding: 38px 26px 32px;
+      box-shadow: 0 24px 54px rgba(12,26,60,0.3);
+    }
+    .limites-bloco .titulo h2 { color: #FFFFFF; }
+    .limites-bloco .titulo p { color: #B9C3DC; }
+
+    .limites-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .limites-bloco .limite {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      padding: 11px;
+      border: 0;
+      text-align: left;
+    }
+    .limites-bloco .limite-corpo { background: #FFFFFF; border-radius: 13px; padding: 18px 15px; flex: 1; }
+    .limites-bloco .limite .limite-corpo h3 { margin: 0 0 8px; font-size: 1rem; color: var(--navy); font-weight: 800; }
+    .limites-bloco .limite .limite-corpo p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: var(--gray); }
+
+    .limites-bloco .limite-ic {
+      align-self: flex-start;
+      width: 40px; height: 40px;
+      border-radius: 11px;
+      background: rgba(255,255,255,0.92);
+      display: flex; align-items: center; justify-content: center;
+      margin: 3px 0 12px 5px;
+    }
+    .limites-bloco .limite-ic svg { width: 20px; height: 20px; }
+
+    .limites-bloco .limite-ilus {
+      position: absolute;
+      top: -34px;
+      right: 6px;
+      width: 96px;
+      height: auto;
+      pointer-events: none;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+    }
+
+    .limites-bloco .limite.l-roxo { background: linear-gradient(140deg, #8B5CF6 0%, #C4A4FF 100%); }
+    .limites-bloco .limite.l-roxo .limite-ic { color: var(--purple); }
+    .limites-bloco .limite.l-gold { background: linear-gradient(140deg, #C9A84C 0%, #E8CC85 100%); }
+    .limites-bloco .limite.l-gold .limite-ic { color: #8A6D1F; }
+    .limites-bloco .limite.l-teal { background: linear-gradient(140deg, #0E94A5 0%, #68CEDC 100%); }
+    .limites-bloco .limite.l-teal .limite-ic { color: var(--teal-dark); }
+
+    .limites-bloco .limites-frase {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 1.22rem;
+      line-height: 1.45;
+      color: #FFFFFF;
+      text-align: center;
+      margin: 34px 0 0;
+    }
+    .limites-bloco .limites-frase em { font-style: italic; color: #ECCB7C; }
+
+    @media (max-width: 1120px) {
+      .usos-grid { grid-template-columns: 1fr; gap: 64px; }
+      .ud-3, .ud-4 { display: none; }
+    }
+
+    @media (max-width: 760px) {
+      .usos { padding: 72px 18px; }
+      .usos-lista { grid-template-columns: 1fr; }
+      .limites-cards { grid-template-columns: 1fr; gap: 46px; }
+      .limites-bloco { padding: 32px 20px 28px; }
+    }
+
     /* ===== ILUSTRAÇÕES NOS CARTÕES ===== */
     .passo-ilus, .ben-ilus {
       position: absolute;
@@ -1113,45 +1247,83 @@
   </div>
 </section>
 
-<!-- CASOS DE USO -->
-<section>
-  <div class="titulo">
-    <h2>Onde a Rubric AI é usada</h2>
-    <p>Sempre que existe uma rubrica e uma pilha de trabalhos para ler.</p>
+<!-- ONDE É USADA + LIMITES -->
+<section class="usos">
+  <div class="usos-deco" aria-hidden="true">
+    <svg class="ud-1" viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M36 72C62 26 128 2 184 14c56 12 96 60 100 116 4 56-28 110-80 126-52 16-124-6-162-54C4 154-10 118 36 72z" fill="#DFCFFA" opacity="0.5"/>
+    </svg>
+    <svg class="ud-2" viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M268 190c-28 46-96 70-152 58-56-12-100-60-104-116C8 76 42 22 94 8c52-14 124 8 162 56 38 48 40 80 12 126z" fill="#E6DAFB" opacity="0.5"/>
+    </svg>
+    <svg class="ud-3" viewBox="0 0 124 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#CFC6E6">
+        <circle cx="6" cy="6" r="4"/><circle cx="33" cy="6" r="4"/><circle cx="60" cy="6" r="4"/><circle cx="87" cy="6" r="4"/><circle cx="114" cy="6" r="4"/>
+        <circle cx="6" cy="33" r="4"/><circle cx="33" cy="33" r="4"/><circle cx="60" cy="33" r="4"/><circle cx="87" cy="33" r="4"/><circle cx="114" cy="33" r="4"/>
+        <circle cx="6" cy="60" r="4"/><circle cx="33" cy="60" r="4"/><circle cx="60" cy="60" r="4"/><circle cx="87" cy="60" r="4"/><circle cx="114" cy="60" r="4"/>
+      </g>
+    </svg>
+    <svg class="ud-4" viewBox="0 0 70 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#E0CFA0">
+        <circle cx="8" cy="8" r="6"/><circle cx="35" cy="8" r="6"/><circle cx="62" cy="8" r="6"/>
+        <circle cx="8" cy="36" r="6"/><circle cx="35" cy="36" r="6"/><circle cx="62" cy="36" r="6"/>
+        <circle cx="8" cy="64" r="6"/><circle cx="35" cy="64" r="6"/><circle cx="62" cy="64" r="6"/>
+      </g>
+    </svg>
   </div>
-  <ul class="casos-grid">
-    <li><span>✓</span> Trabalhos de conclusão de curso (TCC)</li>
-    <li><span>✓</span> Artigos e papers acadêmicos</li>
-    <li><span>✓</span> Projetos de pesquisa e de extensão</li>
-    <li><span>✓</span> Atividades avaliativas ao longo do semestre</li>
-    <li><span>✓</span> Relatórios de estágio e de prática</li>
-    <li><span>✓</span> Correção de turmas grandes, com padrão único</li>
-    <li><span>✓</span> Bancas com mais de um avaliador</li>
-    <li><span>✓</span> Devolutivas de revisão, entre versões do trabalho</li>
-  </ul>
-</section>
 
-<!-- LIMITES E ÉTICA -->
-<section class="limites">
-  <div class="titulo">
-    <h2>A Rubric AI não substitui o professor</h2>
-    <p>Esta seção existe porque o contrário disso seria um produto pior, e uma promessa desonesta.</p>
+  <div class="usos-grid">
+    <div class="usos-col">
+      <div class="titulo">
+        <h2>Onde a Rubric AI é usada</h2>
+        <p>Sempre que existe uma rubrica e uma pilha de trabalhos para ler.</p>
+      </div>
+      <ul class="usos-lista">
+        <li><img src="../ilus-onde-tcc.png" alt="" loading="lazy" decoding="async" /><span>Trabalhos de conclusão de curso (TCC)</span></li>
+        <li><img src="../ilus-onde-artigos.png" alt="" loading="lazy" decoding="async" /><span>Artigos e papers acadêmicos</span></li>
+        <li><img src="../ilus-onde-projetos.png" alt="" loading="lazy" decoding="async" /><span>Projetos de pesquisa e de extensão</span></li>
+        <li><img src="../ilus-onde-atividades.png" alt="" loading="lazy" decoding="async" /><span>Atividades avaliativas ao longo do semestre</span></li>
+        <li><img src="../ilus-onde-relatorios.png" alt="" loading="lazy" decoding="async" /><span>Relatórios de estágio e de prática</span></li>
+        <li><img src="../ilus-onde-turmas.png" alt="" loading="lazy" decoding="async" /><span>Correção de turmas grandes, com padrão único</span></li>
+        <li><img src="../ilus-onde-bancas.png" alt="" loading="lazy" decoding="async" /><span>Bancas com mais de um avaliador</span></li>
+        <li><img src="../ilus-onde-devolutivas.png" alt="" loading="lazy" decoding="async" /><span>Devolutivas de revisão, entre versões do trabalho</span></li>
+      </ul>
+    </div>
+
+    <div class="limites-bloco">
+      <div class="titulo">
+        <h2>A Rubric AI não substitui o professor</h2>
+        <p>Esta seção existe porque o contrário disso seria um produto pior, e uma promessa desonesta.</p>
+      </div>
+      <div class="limites-cards">
+        <div class="limite l-roxo">
+          <img class="limite-ilus" src="../ilus-nao-nota.png" alt="" loading="lazy" decoding="async" />
+          <span class="limite-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7"/><circle cx="12" cy="15.5" r="1.3"/></svg></span>
+          <div class="limite-corpo">
+            <h3>Não fecha nota sozinha</h3>
+            <p>A nota é preliminar até que você a aprove. A plataforma não envia resultado ao aluno, não lança nota em sistema acadêmico e não decide aprovação.</p>
+          </div>
+        </div>
+        <div class="limite l-gold">
+          <img class="limite-ilus" src="../ilus-nao-aluno.png" alt="" loading="lazy" decoding="async" />
+          <span class="limite-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.6-3.6 3.6-5.6 7.2-5.6s6.6 2 7.2 5.6"/></svg></span>
+          <div class="limite-corpo">
+            <h3>Não conhece o aluno</h3>
+            <p>Trajetória, contexto, esforço, condições de entrega e histórico da orientação estão fora do alcance da análise. Estão dentro do alcance do professor.</p>
+          </div>
+        </div>
+        <div class="limite l-teal">
+          <img class="limite-ilus" src="../ilus-nao-falivel.png" alt="" loading="lazy" decoding="async" />
+          <span class="limite-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19.5 6v5.3c0 4.6-3.1 8.4-7.5 9.4-4.4-1-7.5-4.8-7.5-9.4V6z"/><path d="m9 12 2.2 2.2L15.4 10"/></svg></span>
+          <div class="limite-corpo">
+            <h3>Não é infalível</h3>
+            <p>A IA erra, e por isso mostra a justificativa de cada marcação, para que o erro seja visível e corrigível, e não engolido junto com a nota.</p>
+          </div>
+        </div>
+      </div>
+      <p class="limites-frase">Uma correção defensável é aquela em que alguém pode <em>perguntar por quê, e existe resposta.</em></p>
+    </div>
   </div>
-  <div class="limites-grid">
-    <div class="limite">
-      <h3>Não fecha nota sozinha</h3>
-      <p>A nota é preliminar até que você a aprove. A plataforma não envia resultado ao aluno, não lança nota em sistema acadêmico e não decide aprovação.</p>
-    </div>
-    <div class="limite">
-      <h3>Não conhece o aluno</h3>
-      <p>Trajetória, contexto, esforço, condições de entrega e histórico da orientação estão fora do alcance da análise. Estão dentro do alcance do professor.</p>
-    </div>
-    <div class="limite">
-      <h3>Não é infalível</h3>
-      <p>A IA erra, e por isso mostra a justificativa de cada marcação, para que o erro seja visível e corrigível, e não engolido junto com a nota.</p>
-    </div>
-  </div>
-  <p class="limites-frase">Uma correção defensável é aquela em que alguém pode perguntar por quê, e existe resposta.</p>
 </section>
 
 <!-- INSTITUIÇÕES -->
