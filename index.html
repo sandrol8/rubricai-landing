@@ -260,6 +260,123 @@
       .deco-pontos-2 { display: none; }
     }
 
+    /* ===== COMPARATIVO EM CARTOES ===== */
+    .comparativo { position: relative; overflow: hidden; background: linear-gradient(170deg, #F6F0FF 0%, #FBF9FF 55%, #FFFDF7 100%); }
+
+    .comp-deco { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .comp-deco > * { position: absolute; display: block; }
+    .cd-blob-1 { top: -140px; left: -170px; width: 520px; }
+    .cd-blob-2 { bottom: -180px; right: -150px; width: 520px; }
+    .cd-pontos-1 { top: 120px; right: 54px; width: 120px; }
+    .cd-pontos-2 { bottom: 120px; left: 34px; width: 96px; }
+    .cd-folha { top: 150px; right: 10%; width: 150px; }
+
+    .comp-cards {
+      position: relative;
+      z-index: 2;
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .pc {
+      display: flex;
+      flex-direction: column;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 16px 42px rgba(13,27,62,0.10);
+      background: var(--white);
+    }
+
+    .pc-topo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 22px;
+    }
+
+    .pc-logo {
+      width: 52px; height: 52px;
+      border-radius: 13px;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      padding: 7px;
+      flex-shrink: 0;
+    }
+    .pc-logo img { max-width: 100%; max-height: 100%; display: block; }
+
+    .pc-topo h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.42rem;
+      font-weight: 800;
+      color: var(--white);
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    .pc-itens {
+      list-style: none;
+      margin: 0;
+      padding: 22px 22px 10px;
+      display: grid;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .pc-itens li {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+      font-size: 0.97rem;
+      line-height: 1.45;
+      color: var(--navy);
+    }
+
+    .pc-ic {
+      width: 38px; height: 38px;
+      border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .pc-ic svg { width: 21px; height: 21px; }
+
+    .pc-btn {
+      margin: 12px 22px 22px;
+      padding: 14px 18px;
+      border-radius: 13px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .pc.is-roxo .pc-topo { background: linear-gradient(135deg, #7C3AED 0%, #9C5FFF 100%); }
+    .pc.is-roxo .pc-itens { background: linear-gradient(180deg, #F6F0FF 0%, #FFFFFF 70%); }
+    .pc.is-roxo .pc-ic { background: #EADDFF; color: var(--purple-dark); }
+    .pc.is-roxo .pc-btn { background: var(--purple); }
+
+    .pc.is-gold .pc-topo { background: linear-gradient(135deg, #0D1B3E 0%, #22325C 100%); }
+    .pc.is-gold .pc-topo h3 { color: var(--gold-light); }
+    .pc.is-gold .pc-itens { background: linear-gradient(180deg, #FBF4E4 0%, #FFFFFF 70%); }
+    .pc.is-gold .pc-ic { background: #F5E7C6; color: #8A6D1F; }
+    .pc.is-gold .pc-btn { background: var(--gold); }
+
+    .pc.is-teal .pc-topo { background: linear-gradient(135deg, #0E94A5 0%, #19C4D8 100%); }
+    .pc.is-teal .pc-itens { background: linear-gradient(180deg, #E8FAFC 0%, #FFFFFF 70%); }
+    .pc.is-teal .pc-ic { background: #CBEFF5; color: var(--teal-dark); }
+    .pc.is-teal .pc-btn { background: var(--teal); }
+
+    .comp-dica { position: relative; z-index: 2; }
+
+    @media (max-width: 1080px) {
+      .comp-cards { grid-template-columns: 1fr; max-width: 560px; }
+      .cd-folha, .cd-pontos-1 { display: none; }
+    }
+
     /* ===== HERO EM VITRINE: lema, tres produtos e precos ===== */
     .hero { position: relative; overflow: hidden; }
 
@@ -1926,66 +2043,85 @@
 
 <!-- COMPARATIVO -->
 <section class="comparativo" id="comparativo">
-  <div class="section-title">
+  <div class="comp-deco" aria-hidden="true">
+    <svg class="cd-blob-1" viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M36 72C62 26 128 2 184 14c56 12 96 60 100 116 4 56-28 110-80 126-52 16-124-6-162-54C4 154-10 118 36 72z" fill="#E3D4FB" opacity="0.6"/>
+    </svg>
+    <svg class="cd-blob-2" viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M268 190c-28 46-96 70-152 58-56-12-100-60-104-116C8 76 42 22 94 8c52-14 124 8 162 56 38 48 40 80 12 126z" fill="#E7DCFB" opacity="0.62"/>
+    </svg>
+    <svg class="cd-pontos-1" viewBox="0 0 124 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#CFC6E6">
+        <circle cx="6" cy="6" r="4"/><circle cx="33" cy="6" r="4"/><circle cx="60" cy="6" r="4"/><circle cx="87" cy="6" r="4"/><circle cx="114" cy="6" r="4"/>
+        <circle cx="6" cy="33" r="4"/><circle cx="33" cy="33" r="4"/><circle cx="60" cy="33" r="4"/><circle cx="87" cy="33" r="4"/><circle cx="114" cy="33" r="4"/>
+        <circle cx="6" cy="60" r="4"/><circle cx="33" cy="60" r="4"/><circle cx="60" cy="60" r="4"/><circle cx="87" cy="60" r="4"/><circle cx="114" cy="60" r="4"/>
+        <circle cx="6" cy="86" r="4"/><circle cx="33" cy="86" r="4"/><circle cx="60" cy="86" r="4"/><circle cx="87" cy="86" r="4"/><circle cx="114" cy="86" r="4"/>
+      </g>
+    </svg>
+    <svg class="cd-pontos-2" viewBox="0 0 70 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#C9B9E8">
+        <circle cx="8" cy="8" r="6"/><circle cx="35" cy="8" r="6"/><circle cx="62" cy="8" r="6"/>
+        <circle cx="8" cy="36" r="6"/><circle cx="35" cy="36" r="6"/><circle cx="62" cy="36" r="6"/>
+        <circle cx="8" cy="64" r="6"/><circle cx="35" cy="64" r="6"/><circle cx="62" cy="64" r="6"/>
+      </g>
+    </svg>
+    <svg class="cd-folha" viewBox="0 0 160 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22 186C2 140 10 78 50 42 90 6 142-2 158 4c-6 58-28 112-66 146-26 24-52 34-70 36z" fill="#E8C96A" opacity="0.55"/>
+    </svg>
+  </div>
+  <div class="section-title" style="position:relative;z-index:2;">
     <h2>Qual é o produto certo para você?</h2>
     <p>Os três produtos se complementam. Veja lado a lado o que cada um faz e como é cobrado.</p>
   </div>
-  <div class="comp-scroll">
-    <table class="comp-tabela">
-      <thead>
-        <tr>
-          <th class="vazio" scope="col"></th>
-          <th class="c-purple" scope="col">Rubric AI</th>
-          <th class="c-navy" scope="col">Rubric AI Masters</th>
-          <th class="c-teal" scope="col">Rubric Detect IA</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">Para quem</th>
-          <td>Professores que corrigem trabalhos com rubrica, na graduação e na pós</td>
-          <td>Professores de mestrado: orientadores e membros de banca</td>
-          <td>Professores e instituições que precisam checar a originalidade</td>
-        </tr>
-        <tr>
-          <th scope="row">Tipo de trabalho</th>
-          <td>TCCs, papers, projetos e atividades avaliativas</td>
-          <td>Monografias e dissertações, em construção ou concluídas</td>
-          <td>Qualquer trabalho acadêmico, de uma atividade a uma tese</td>
-        </tr>
-        <tr>
-          <th scope="row">O que você recebe</th>
-          <td>Nota sugerida e feedback por critério da sua rubrica</td>
-          <td>Comentários no próprio Word do aluno e, na banca, uma proposta de parecer</td>
-          <td>Relatório de similaridade, trechos de atenção e indícios de escrita artificial</td>
-        </tr>
-        <tr>
-          <th scope="row">Quem decide</th>
-          <td>O professor revisa cada critério antes de fechar a nota</td>
-          <td>O professor aceita, edita ou exclui cada comentário</td>
-          <td>O professor interpreta o relatório, que nunca é prova</td>
-        </tr>
-        <tr>
-          <th scope="row">Como é cobrado</th>
-          <td>Assinatura mensal</td>
-          <td>Pacotes de créditos, pagamento único</td>
-          <td>Pacotes de detecções, pagamento único</td>
-        </tr>
-        <tr>
-          <th scope="row">Para começar</th>
-          <td>3 correções grátis por mês</td>
-          <td>3 monografias e 1 banca de cortesia</td>
-          <td>Detecção avulsa por R$ 4,90</td>
-        </tr>
-        <tr>
-          <th scope="row"></th>
-          <td><a href="/rubric-ai/" class="comp-link purple">Conhecer o Rubric AI →</a></td>
-          <td><a href="/rubric-ai-masters/" class="comp-link gold">Conhecer o Masters →</a></td>
-          <td><a href="/rubric-detect-ia/" class="comp-link teal">Conhecer o Detect IA →</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="comp-cards">
+      <article class="pc is-roxo">
+        <header class="pc-topo">
+          <span class="pc-logo"><img src="logo_purple.png" alt="" loading="lazy" decoding="async" /></span>
+          <h3>Rubric AI</h3>
+        </header>
+        <ul class="pc-itens">
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.6-3.6 3.6-5.6 7.2-5.6s6.6 2 7.2 5.6"/></svg></span><span>Professores que corrigem trabalhos com rubrica, na graduação e na pós</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h7.5L19 8.5V21H6z"/><path d="M13.5 3v5.5H19"/><path d="M9 13h6M9 16.5h6"/></svg></span><span>TCCs, papers, projetos e atividades avaliativas</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5h17V20h-17z"/><path d="M3.5 8.5 12 3.5l8.5 5"/><path d="M12 3.5V20"/></svg></span><span>Nota sugerida e feedback por critério da sua rubrica</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.6M12 18.6v2.6M21.2 12h-2.6M5.4 12H2.8M18.5 5.5l-1.8 1.8M7.3 16.7l-1.8 1.8M18.5 18.5l-1.8-1.8M7.3 7.3 5.5 5.5"/></svg></span><span>O professor revisa cada critério antes de fechar a nota</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5h17V19h-17z"/><path d="M3.5 7.5 16 4.2v3.3"/><circle cx="16.8" cy="13.2" r="1.3"/></svg></span><span>Assinatura mensal</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.4 2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8-5.4 2.8 1-6L3.3 9.8l6-.9z"/></svg></span><span>3 correções grátis por mês</span></li>
+        </ul>
+        <a href="/rubric-ai/" class="pc-btn">Conhecer o Rubric AI →</a>
+      </article>
+
+      <article class="pc is-gold">
+        <header class="pc-topo">
+          <span class="pc-logo"><img src="logo_masters_v2.png" alt="" loading="lazy" decoding="async" /></span>
+          <h3>Rubric AI Masters</h3>
+        </header>
+        <ul class="pc-itens">
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.6-3.6 3.6-5.6 7.2-5.6s6.6 2 7.2 5.6"/></svg></span><span>Professores de mestrado: orientadores e membros de banca</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h7.5L19 8.5V21H6z"/><path d="M13.5 3v5.5H19"/><path d="M9 13h6M9 16.5h6"/></svg></span><span>Monografias e dissertações, em construção ou concluídas</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5h17V20h-17z"/><path d="M3.5 8.5 12 3.5l8.5 5"/><path d="M12 3.5V20"/></svg></span><span>Comentários no próprio Word do aluno e, na banca, uma proposta de parecer</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.6M12 18.6v2.6M21.2 12h-2.6M5.4 12H2.8M18.5 5.5l-1.8 1.8M7.3 16.7l-1.8 1.8M18.5 18.5l-1.8-1.8M7.3 7.3 5.5 5.5"/></svg></span><span>O professor aceita, edita ou exclui cada comentário</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5h17V19h-17z"/><path d="M3.5 7.5 16 4.2v3.3"/><circle cx="16.8" cy="13.2" r="1.3"/></svg></span><span>Pacotes de créditos, pagamento único</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.4 2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8-5.4 2.8 1-6L3.3 9.8l6-.9z"/></svg></span><span>3 monografias e 1 banca de cortesia</span></li>
+        </ul>
+        <a href="/rubric-ai-masters/" class="pc-btn">Conhecer o Masters →</a>
+      </article>
+
+      <article class="pc is-teal">
+        <header class="pc-topo">
+          <span class="pc-logo"><img src="rubric_detect_ia_logo.png" alt="" loading="lazy" decoding="async" /></span>
+          <h3>Rubric Detect IA</h3>
+        </header>
+        <ul class="pc-itens">
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.6-3.6 3.6-5.6 7.2-5.6s6.6 2 7.2 5.6"/></svg></span><span>Professores e instituições que precisam checar a originalidade</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h7.5L19 8.5V21H6z"/><path d="M13.5 3v5.5H19"/><path d="M9 13h6M9 16.5h6"/></svg></span><span>Qualquer trabalho acadêmico, de uma atividade a uma tese</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5h17V20h-17z"/><path d="M3.5 8.5 12 3.5l8.5 5"/><path d="M12 3.5V20"/></svg></span><span>Relatório de similaridade, trechos de atenção e indícios de escrita artificial</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.6M12 18.6v2.6M21.2 12h-2.6M5.4 12H2.8M18.5 5.5l-1.8 1.8M7.3 16.7l-1.8 1.8M18.5 18.5l-1.8-1.8M7.3 7.3 5.5 5.5"/></svg></span><span>O professor interpreta o relatório, que nunca é prova</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5h17V19h-17z"/><path d="M3.5 7.5 16 4.2v3.3"/><circle cx="16.8" cy="13.2" r="1.3"/></svg></span><span>Pacotes de detecções, pagamento único</span></li>
+        <li><span class="pc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.4 2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8-5.4 2.8 1-6L3.3 9.8l6-.9z"/></svg></span><span>Detecção avulsa por R$ 4,90</span></li>
+        </ul>
+        <a href="/rubric-detect-ia/" class="pc-btn">Conhecer o Detect IA →</a>
+      </article>
+    </div>
   <p class="comp-dica">Na dúvida, fale com a gente pelo WhatsApp e indicamos o produto certo para o seu caso.</p>
 </section>
 
