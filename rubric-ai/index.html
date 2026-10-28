@@ -59,6 +59,121 @@
     .hero-preco strong { font-size: 1.1rem; color: var(--navy); font-weight: 800; }
     .hero-preco span { font-size: 0.9rem; color: var(--gray); }
 
+
+    /* ===== CONVITE DO TESTE DENTRO DO TOPO ===== */
+    .hero { position: relative; overflow: hidden; }
+
+    .hero-deco { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .hero-deco > * { position: absolute; display: block; }
+    .hd-blob-1 { top: -150px; right: -150px; width: 520px; }
+    .hd-blob-2 { bottom: -190px; right: 6%; width: 420px; }
+    .hd-pontos { top: 96px; left: 52%; width: 120px; }
+    .hero-inner { position: relative; z-index: 2; }
+
+    .teste-card {
+      position: relative;
+      margin: 26px 0 24px;
+      padding: 26px 28px 22px 118px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #22103F 0%, #3C1E70 55%, #2A1251 100%);
+      box-shadow: 0 18px 44px rgba(35,16,66,0.26);
+      overflow: hidden;
+      max-width: 560px;
+    }
+
+    .teste-raio {
+      position: absolute;
+      left: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 62px;
+      height: auto;
+    }
+
+    .teste-selo {
+      display: inline-block;
+      background: linear-gradient(90deg, #7C3AED 0%, #C084FC 100%);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      padding: 7px 15px;
+      border-radius: 999px;
+    }
+
+    .teste-titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.72rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin: 13px 0 8px;
+      line-height: 1.2;
+    }
+    .teste-titulo em { font-style: normal; color: #C9ADFF; }
+
+    .teste-card .teste-texto {
+      color: #E2D9F4;
+      font-size: 0.97rem;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .teste-rodape {
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      margin: 16px 0 0;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255,255,255,0.16);
+      color: #F3EDFF;
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+
+    .teste-check {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      color: #2A1251;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-top: 1px;
+    }
+
+    .hero-ctas.coluna {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+      max-width: 560px;
+    }
+
+    .btn.largo {
+      width: 100%;
+      text-align: center;
+      padding: 17px 24px;
+      font-size: 1.04rem;
+    }
+
+    .hero-micro {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin: 2px 0 6px;
+    }
+    .hero-micro svg { width: 17px; height: 17px; color: var(--purple); flex-shrink: 0; }
+
+    @media (max-width: 640px) {
+      .teste-card { padding: 92px 22px 20px; }
+      .teste-raio { left: 22px; top: 26px; transform: none; width: 52px; }
+      .teste-titulo { font-size: 1.45rem; }
+      .hd-pontos { display: none; }
+    }
+
     /* ===== NAV ===== */
     nav {
       position: sticky;
@@ -589,15 +704,49 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-deco" aria-hidden="true">
+    <svg class="hd-blob-1" viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M36 72C62 26 128 2 184 14c56 12 96 60 100 116 4 56-28 110-80 126-52 16-124-6-162-54C4 154-10 118 36 72z" fill="#DFCFFA" opacity="0.5"/>
+    </svg>
+    <svg class="hd-blob-2" viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M268 190c-28 46-96 70-152 58-56-12-100-60-104-116C8 76 42 22 94 8c52-14 124 8 162 56 38 48 40 80 12 126z" fill="#E6DAFB" opacity="0.5"/>
+    </svg>
+    <svg class="hd-pontos" viewBox="0 0 124 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#CFC6E6">
+        <circle cx="6" cy="6" r="4"/><circle cx="33" cy="6" r="4"/><circle cx="60" cy="6" r="4"/><circle cx="87" cy="6" r="4"/><circle cx="114" cy="6" r="4"/>
+        <circle cx="6" cy="33" r="4"/><circle cx="33" cy="33" r="4"/><circle cx="60" cy="33" r="4"/><circle cx="87" cy="33" r="4"/><circle cx="114" cy="33" r="4"/>
+        <circle cx="6" cy="60" r="4"/><circle cx="33" cy="60" r="4"/><circle cx="60" cy="60" r="4"/><circle cx="87" cy="60" r="4"/><circle cx="114" cy="60" r="4"/>
+      </g>
+    </svg>
+  </div>
   <div class="hero-inner">
     <div>
       <img src="../logo_purple.png" alt="Logotipo da Rubric AI" class="hero-logo" />
       <h1>A correção acadêmica para quem <em>valoriza critério</em> e decide a nota</h1>
       <p>A Rubric AI lê o trabalho do aluno com base na rubrica que você já usa, marca cada critério como atendido ou não atendido, sugere uma nota preliminar e escreve a justificativa de cada marcação. Você revisa, ajusta o que discordar e fecha a nota. Serve para TCCs, papers, monografias e projetos.</p>
       <p class="hero-nota">A IA analisa. O professor decide. Nenhuma nota é fechada automaticamente, o professor sempre revisa e aprova antes de finalizar o resultado.</p>
-      <p class="hero-preco"><strong>A partir de R$ 39,90 por mês</strong><span>Plano gratuito com 3 correções por mês, sem cartão de crédito.</span></p>
-      <div class="hero-ctas">
-        <a href="https://app.rubricai.com.br/cadastro" class="btn roxo">Testar grátis, 3 correções por mês →</a>
+      <div class="teste-card">
+        <svg class="teste-raio" viewBox="0 0 48 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="raio" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#FFE9A8"/>
+              <stop offset="0.5" stop-color="#F5C544"/>
+              <stop offset="1" stop-color="#D99A1F"/>
+            </linearGradient>
+          </defs>
+          <path d="M27 2 6 36h13L17 62 42 26H28z" fill="url(#raio)" stroke="#C9881A" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+        <span class="teste-selo">Teste sem risco</span>
+        <h2 class="teste-titulo">Corrija <em>3 trabalhos grátis</em></h2>
+        <p class="teste-texto">Sem cartão de crédito. Compare com um TCC que você já corrigiu.</p>
+        <p class="teste-rodape"><span class="teste-check">✓</span><span>Se não fizer sentido para o seu curso, você perde só dois minutos.</span></p>
+      </div>
+      <div class="hero-ctas coluna">
+        <a href="https://app.rubricai.com.br/cadastro" class="btn roxo largo">Testar grátis agora →</a>
+        <p class="hero-micro">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.6 5.8v6c0 4.6 3.1 8.8 7.4 9.9 4.3-1.1 7.4-5.3 7.4-9.9v-6z"/><path d="m9 12 2.2 2.2L15.4 10"/></svg>
+          3 correções por mês, sem cadastro de cartão. Planos pagos a partir de R$ 39,90 por mês.
+        </p>
         <a href="https://wa.me/5511968383768?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20a%20Rubric%20AI%20para%20a%20minha%20institui%C3%A7%C3%A3o." class="btn vazado" target="_blank" rel="noopener">Falar com especialista</a>
       </div>
     </div>
@@ -614,16 +763,6 @@
         <figcaption>Análise real da plataforma. A nota preliminar e as justificativas são apresentadas ao professor, que revisa cada critério antes de finalizar o resultado. <a href="../tela-rubric-ai.jpg" target="_blank" rel="noopener">Clique para ampliar.</a></figcaption>
       </figure>
     </div>
-  </div>
-</section>
-
-<!-- CONVITE -->
-<section class="cta-final">
-  <h2>Corrija três trabalhos sem pagar nada</h2>
-  <p>Envie um TCC que você já corrigiu e compare. Se a análise não fizer sentido para o seu curso, você não perdeu nada além de dois minutos.</p>
-  <div class="hero-ctas">
-    <a href="https://app.rubricai.com.br/cadastro" class="btn roxo">Começar grátis →</a>
-    <a href="https://wa.me/5511968383768?text=Ol%C3%A1%21%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20da%20Rubric%20AI." class="btn vazado-claro" target="_blank" rel="noopener">Agendar demonstração</a>
   </div>
 </section>
 
